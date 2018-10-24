@@ -1,16 +1,18 @@
-import { resolve } from 'path'
+import { resolve, join } from 'path'
 import { debuglog } from 'util'
 
 const LOG = debuglog('@zoroaster/fork')
 
-const FIXTURE = resolve(__dirname, '../fixture')
+const FIXTURE = 'test/fixture'
 
 /**
  * A testing context for the package.
  */
 export default class Context {
-  async _init() {
-    LOG('init context')
+
+  /** Path to the fork. */
+  get forkPath() {
+    return join(FIXTURE, 'fork.js')
   }
   /**
    * Example method.
@@ -26,8 +28,5 @@ export default class Context {
   }
   get SNAPSHOT_DIR() {
     return resolve(__dirname, '../snapshot')
-  }
-  async _destroy() {
-    LOG('destroy context')
   }
 }

@@ -1,21 +1,40 @@
-import { equal, ok } from 'zoroaster/assert'
+import { deepEqual } from 'zoroaster/assert'
+import throws from 'assert-throws'
 import Context from '../context'
 import fork from '../../src'
+import Log from '../context/Log'
 
 /** @type {Object.<string, (c: Context)>} */
 const T = {
   context: Context,
-  'is a function'() {
-    equal(typeof fork, 'function')
-  },
-  async 'calls package without error'() {
-    await fork()
-  },
-  async 'gets a link to the fixture'({ FIXTURE }) {
+  async 'returns result'({ forkPath }) {
     const res = await fork({
-      text: FIXTURE,
+      forkConfig: {
+        module: forkPath,
+      },
     })
-    ok(res, FIXTURE)
+    deepEqual(res, {
+      stdout: 'test',
+      stderr: 'test',
+      code: 0,
+    })
+  },
+}
+
+/** @type {Object.<string, (c: Context, l: Log)>} */
+export const processLog = {
+  context: [Context, Log],
+  async 'logs to stdout and stderr'({ forkPath }, { getStderr, getStdout }) {
+    await fork({
+      forkConfig: {
+        module: forkPath,
+        log: true,
+      },
+    })
+    const stdout = getStdout()
+    const stderr = getStderr()
+    deepEqual(stdout, ['test'])
+    deepEqual(stderr, ['test'])
   },
 }
 
