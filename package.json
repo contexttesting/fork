@@ -1,6 +1,6 @@
 {
   "name": "@zoroaster/fork",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Test forks.",
   "main": "build",
   "scripts": {
