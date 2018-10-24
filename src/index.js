@@ -1,6 +1,7 @@
 import { fork } from 'spawncommand'
 import forkFeed from 'forkfeed'
-import { getArgs, getForkArguments, assertForkOutput } from './lib'
+import { getForkArguments, assertForkOutput } from './lib'
+import getArgs from './lib/get-args'
 import { PassThrough } from 'stream'
 import Catchment from 'catchment'
 
@@ -86,5 +87,5 @@ export default run
  * @prop {[RegExp, string][]} [inputs] Inputs to push to `stdin` when `stdout` writes data. The inputs are kept on stack, and taken off the stack when the RegExp matches the written data.
  * @prop {[RegExp, string][]} [stderrInputs] Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`).
  * @prop {boolean|{stderr: Writable, stdout: Writable}} [log=false] Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. Default `false`.
- * @prop {boolean} [includeAnswers=false] Whether to add the answers to the `stderr` and `stdout` output. Default `false`.
+ * @prop {boolean} [includeAnswers=true] Whether to add the answers to the `stderr` and `stdout` output. Default `true`.
  */

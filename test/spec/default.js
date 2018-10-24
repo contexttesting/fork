@@ -19,6 +19,19 @@ const T = {
       code: 0,
     })
   },
+  async 'returns result with input'({ forkPath }) {
+    const res = await fork({
+      forkConfig: {
+        module: forkPath,
+      },
+      input: 'test',
+    })
+    deepEqual(res, {
+      stdout: 'test',
+      stderr: 'test',
+      code: 0,
+    })
+  },
 }
 
 /** @type {Object.<string, (c: Context, l: Log)>} */
