@@ -1,7 +1,7 @@
 const { fork } = require('spawncommand');
 let forkFeed = require('forkfeed'); if (forkFeed && forkFeed.__esModule) forkFeed = forkFeed.default;
 const { getForkArguments, assertForkOutput } = require('./lib');
-let getArgs = require('./lib/get-args'); if (getArgs && getArgs.__esModule) getArgs = getArgs.default;
+const getArgs = require('./lib/get-args');
 const { PassThrough } = require('stream');
 let Catchment = require('catchment'); if (Catchment && Catchment.__esModule) Catchment = Catchment.default;
 

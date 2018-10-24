@@ -29,7 +29,10 @@
   },
   "keywords": [
     "fork",
-    "zoroaster"
+    "zoroaster",
+    "context",
+    "testing",
+    "test"
   ],
   "author": "Anton <anton@adc.sh>",
   "license": "MIT",
@@ -38,12 +41,12 @@
   },
   "homepage": "https://github.com/contexttesting/fork#readme",
   "devDependencies": {
-    "alamode": "1.5.1",
+    "alamode": "1.6.0",
     "documentary": "1.20.1",
     "eslint-config-artdeco": "1.0.1",
     "reloquent": "1.2.3",
     "yarn-s": "1.1.0",
-    "zoroaster": "3.5.2"
+    "zoroaster": "3.6.2"
   },
   "dependencies": {
     "assert-diff": "2.0.3",
