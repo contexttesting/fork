@@ -8,18 +8,20 @@ import fork from '@zoroaster/fork'
 
 %~%
 
-```## fork
+```## async fork => { stdout, stderr, code }
 [
-  ["arg1", "string"],
-  ["arg2?", "boolean"]
+  ["forkConfig", "string|ForkConfig"],
+  ["input", "string"],
+  ["props?", "*"],
+  ["contexts?", "Context[]"]
 ]
 ```
 
-Call this function to get the result you want.
+This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
 
 %TYPEDEF types/index.xml%
 
-%EXAMPLE: example/example.js, ../src => @zoroaster/fork%
-%FORK example example/example%
+<!-- %EXAMPLE: example/example.js, ../src => @zoroaster/fork%
+%FORK example example/example% -->
 
 %~%

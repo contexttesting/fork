@@ -7,7 +7,7 @@ import Catchment from 'catchment'
 
 /**
  * Run a fork.
- * @param {{forkConfig: string|ForkConfig, input: string, props: *, contexts?: Context[] }}
+ * @param {{forkConfig: string|ForkConfig, input: string, props?: *, contexts?: Context[] }}
  */
 const run = async ({
   forkConfig,

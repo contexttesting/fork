@@ -2,7 +2,7 @@
 
 %NPM: @zoroaster/fork%
 
-`@zoroaster/fork` is Test forks.
+`@zoroaster/fork` is used in _Zoroaster_ to test forks.
 
 ```sh
 yarn add -E @zoroaster/fork

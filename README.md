@@ -1,8 +1,8 @@
 # @zoroaster/fork
 
-[![npm version](https://badge.fury.io/js/@zoroaster/fork.svg)](https://npmjs.org/package/@zoroaster/fork)
+[![npm version](https://badge.fury.io/js/%40zoroaster%2Ffork.svg)](https://npmjs.org/package/@zoroaster/fork)
 
-`@zoroaster/fork` is Test forks.
+`@zoroaster/fork` is used in _Zoroaster_ to test forks.
 
 ```sh
 yarn add -E @zoroaster/fork
@@ -12,8 +12,8 @@ yarn add -E @zoroaster/fork
 
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
-- [`fork(arg1: string, arg2?: boolean)`](#mynewpackagearg1-stringarg2-boolean-void)
-  * [`Config`](#type-config)
+- [`async fork(forkConfig: string|ForkConfig, input: string, props?: *, contexts?: Context[]): { stdout, stderr, code }`](#async-forkforkconfig-stringforkconfiginput-stringprops-contexts-context--stdout-stderr-code-)
+  * [`ForkConfig`](#type-forkconfig)
 - [Copyright](#copyright)
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
@@ -28,31 +28,24 @@ import fork from '@zoroaster/fork'
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
 
-## `fork(`<br/>&nbsp;&nbsp;`arg1: string,`<br/>&nbsp;&nbsp;`arg2?: boolean,`<br/>`): void`
+## `async fork(`<br/>&nbsp;&nbsp;`forkConfig: string|ForkConfig,`<br/>&nbsp;&nbsp;`input: string,`<br/>&nbsp;&nbsp;`props?: *,`<br/>&nbsp;&nbsp;`contexts?: Context[],`<br/>`): { stdout, stderr, code }`
 
-Call this function to get the result you want.
+This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
 
-__<a name="type-config">`Config`</a>__: Options for the program.
+`import('child_process').ForkOptions` __<a name="type-forkoptions">`ForkOptions`</a>__
 
-|   Name    |   Type    |    Description    | Default |
-| --------- | --------- | ----------------- | ------- |
-| shouldRun | _boolean_ | A boolean option. | `true`  |
-| __text*__ | _string_  | A text to return. | -       |
+__<a name="type-forkconfig">`ForkConfig`</a>__: Parameters for forking.
 
-```js
-/* yarn example/ */
-import fork from '@zoroaster/fork'
-
-(async () => {
-  const res = await fork({
-    text: 'example',
-  })
-  console.log(res)
-})()
-```
-```
-example
-```
+|      Name      |                                       Type                                        |                                                                                      Description                                                                                      | Default |
+| -------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| __module*__    | _string_                                                                          | The path to the module to fork.                                                                                                                                                       | -       |
+| getArgs        | _(args: string[], ...contexts?: Context[]) =&gt; string[]\|Promise.&lt;string[]>_ | The function to get arguments to pass the forked processed based on parsed masks input and contexts.                                                                                  | -       |
+| getOptions     | _(...contexts?: Context[]) =&gt; ForkOptions_                                     | The function to get options for the forked processed, such as `ENV` and `cwd`, based on contexts.                                                                                     | -       |
+| options        | _[ForkOptions](#type-forkoptions)_                                                | Options for the forked processed, such as `ENV` and `cwd`.                                                                                                                            | -       |
+| inputs         | _[RegExp, string][]_                                                              | Inputs to push to `stdin` when `stdout` writes data. The inputs are kept on stack, and taken off the stack when the RegExp matches the written data.                                  | -       |
+| stderrInputs   | _[RegExp, string][]_                                                              | Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`).                                                                                                            | -       |
+| log            | _boolean\|{stderr: Writable, stdout: Writable}_                                   | Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. | `false` |
+| includeAnswers | _boolean_                                                                         | Whether to add the answers to the `stderr` and `stdout` output.                                                                                                                       | `true`  |
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
 
