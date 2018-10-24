@@ -34,11 +34,12 @@ const run = async ({
     log.stderr && stderrLog.pipe(log.stderr)
   }
 
+  const needsStdoutAnswers = includeAnswers && inputs
+  const needsStderrAnswers = includeAnswers && stderrInputs
+
   let co, ce
-  if (includeAnswers) {
-    co = new Catchment({ rs: stdoutLog })
-    ce = new Catchment({ rs: stderrLog })
-  }
+  if (needsStdoutAnswers) co = new Catchment({ rs: stdoutLog })
+  if (needsStderrAnswers) ce = new Catchment({ rs: stderrLog })
 
   forkFeed(stdout, stdin, inputs, stdoutLog)
   forkFeed(stderr, stdin, stderrInputs, stderrLog)
@@ -46,11 +47,15 @@ const run = async ({
   const res = await promise
 
   // override process's outputs with outputs with answers
-  if (includeAnswers) {
+  if (needsStdoutAnswers) {
     co.end(); const stdoutWithAnswers = await co.promise
-    ce.end(); const stderrWithAnswers = await ce.promise
     Object.assign(res, {
       stdout: stdoutWithAnswers,
+    })
+  }
+  if (needsStderrAnswers) {
+    ce.end(); const stderrWithAnswers = await ce.promise
+    Object.assign(res, {
       stderr: stderrWithAnswers,
     })
   }
