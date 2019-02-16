@@ -1,5 +1,4 @@
-import { deepEqual } from 'zoroaster/assert'
-import throws from 'assert-throws'
+import { deepEqual, equal } from 'zoroaster/assert'
 import Context from '../context'
 import fork from '../../src'
 import Log from '../context/Log'
@@ -31,6 +30,23 @@ const T = {
       stderr: 'test',
       code: 0,
     })
+  },
+  async 'passes inputs to the configs'({ forkPath }) {
+    let input
+    let prop
+    await fork({
+      forkConfig: {
+        module: forkPath,
+        getOptions() {
+          input = this.input
+          prop = this.aproperty
+        },
+      },
+      input: 'test',
+      props: { aproperty: 1 },
+    })
+    equal(input, 'test')
+    equal(prop, 1)
   },
 }
 

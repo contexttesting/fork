@@ -54,6 +54,17 @@ const T = {
     }, [], [{ silent: true }])
     deepEqual(res, { mod, args: [], options: { ...options, silent: true } })
   },
+  async 'gets options with context'(mod) {
+    let input, props
+    await getForkArguments({
+      module: mod,
+      getOptions() {
+        input = this.input
+        props = this.props
+      },
+    }, [], [{ silent: true }], { input: '123', props: 'ok' })
+    deepEqual({ input, props }, { input: '123', props: 'ok' })
+  },
 }
 
 export default T
