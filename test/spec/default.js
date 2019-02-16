@@ -33,7 +33,7 @@ const T = {
       code: 0,
     })
   },
-  async '!passes inputs to the configs'({ forkPath }) {
+  async 'passes inputs to the configs'({ forkPath }) {
     let input
     let prop
     await fork({

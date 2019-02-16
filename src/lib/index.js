@@ -20,8 +20,9 @@ export const assertExpected = (result, expected) => {
  * @param {ForkOptions} [forkConfig.options] Options for the forked processed, such as `ENV` and `cwd`.
  * @param {string[]} args
  * @param {Context[]} contexts
+ * @param {*} props The props found in the mask.
  */
-export const getForkArguments = async (forkConfig, args = [], context = []) => {
+export const getForkArguments = async (forkConfig, args = [], context = [], props = {}) => {
   /**
    * @type {ForkOptions}
    */
@@ -42,7 +43,7 @@ export const getForkArguments = async (forkConfig, args = [], context = []) => {
     options,
     getOptions,
   } = forkConfig
-  const a = getArgs ? await getArgs(args, ...context) : args
+  const a = getArgs ? await getArgs.call(props, args, ...context) : args
   let opt = stdioOpts
   if (options) {
     opt = {
@@ -50,7 +51,7 @@ export const getForkArguments = async (forkConfig, args = [], context = []) => {
       ...options,
     }
   } else if (getOptions) {
-    const o = await getOptions(...context)
+    const o = await getOptions.call(props, ...context)
     opt = {
       ...stdioOpts,
       ...o,

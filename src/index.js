@@ -18,7 +18,10 @@ const run = async ({
   const a = input ? getArgs(input) : []
   const {
     mod, args, options,
-  } = await getForkArguments(forkConfig, a, contexts)
+  } = await getForkArguments(forkConfig, a, contexts, {
+    ...props,
+    input,
+  })
   const { promise, stdout, stdin, stderr } = fork(mod, args, options)
 
   const { includeAnswers = true, log, inputs, stderrInputs } = forkConfig
