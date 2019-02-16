@@ -1,0 +1,16 @@
+<types>
+  <type name="Run" desc="Options for the run method.">
+    <prop type="(string|ForkConfig)" name="forkConfig">
+      Either the config, or the path to the module to fork.
+    </prop>
+    <prop string name="input">
+      The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.
+    </prop>
+    <prop name="props" default="{}">
+      The properties to pass to the `getArgs` and `getOptions` as their this context.
+    </prop>
+    <prop type="Array<Context>" name="contexts" default="[]">
+      The contexts for the test to be passed to `getArgs` and `getOptions`.
+    </prop>
+  </type>
+</types>

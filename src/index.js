@@ -7,14 +7,20 @@ import Catchment from 'catchment'
 
 /**
  * Run a fork.
- * @param {{forkConfig: string|ForkConfig, input: string, props?: *, contexts?: Context[] }}
+ * @param {Run} config Options for the run method.
+ * @param {(string|ForkConfig)} config.forkConfig Either the config, or the path to the module to fork.
+ * @param {string} config.input The input to the test from the test mask.
+ * @param {*} [config.props="{}"] Other Properties Of The Test, Such As `stdout` And `stderr`. Default `{}`.
+ * @param {Array<Context>} [config.contexts="[]"] The contexts for the test to be passed to `getArgs` and `getOptions`. Default `[]`.
+ * @returns {Promise<{stdout: string, stderr: string, code: number}>} The result of the work, updated to contain answers in the interactive mode.
  */
-const run = async ({
-  forkConfig,
-  input,
-  props = {},
-  contexts = [],
-}) => {
+const run = async (config) => {
+  const {
+    forkConfig,
+    input,
+    props = {},
+    contexts = [],
+  } = config
   const a = input ? getArgs(input) : []
   const {
     mod, args, options,
@@ -96,4 +102,13 @@ export default run
  * @prop {[RegExp, string][]} [stderrInputs] Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`).
  * @prop {boolean|{stderr: Writable, stdout: Writable}} [log=false] Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. Default `false`.
  * @prop {boolean} [includeAnswers=true] Whether to add the answers to the `stderr` and `stdout` output. Default `true`.
+ */
+
+/* documentary types/run.xml */
+/**
+ * @typedef {Object} Run Options for the run method.
+ * @prop {(string|ForkConfig)} forkConfig Either the config, or the path to the module to fork.
+ * @prop {string} input The input to the test from the test mask.
+ * @prop {*} [props="{}"] Other Properties Of The Test, Such As `stdout` And `stderr`. Default `{}`.
+ * @prop {Array<Context>} [contexts="[]"] The contexts for the test to be passed to `getArgs` and `getOptions`. Default `[]`.
  */

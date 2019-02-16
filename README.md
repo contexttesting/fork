@@ -47,12 +47,54 @@ __<a name="type-forkconfig">`ForkConfig`</a>__: Parameters for forking.
 | log            | _boolean\|{stderr: Writable, stdout: Writable}_                                   | Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. | `false` |
 | includeAnswers | _boolean_                                                                         | Whether to add the answers to the `stderr` and `stdout` output.                                                                                                                       | `true`  |
 
+_For example, to test the fork with the next code:_
+```js
+const [,, ...args] = process.argv
+console.log(args)
+console.error(process.env.EXAMPLE)
+process.exit(5)
+```
+
+_The ContextTesting/Fork can be used:_
+```js
+/* yarn example/ */
+import fork from '@zoroaster/fork'
+
+(async () => {
+  const res = await fork({
+    contexts: ['CONTEXT'],
+    forkConfig: {
+      module: 'example/fork',
+      getArgs(inputs) {
+        return [...inputs, this.prop1]
+      },
+      getOptions(CONTEXT) {
+        return {
+          env: {
+            EXAMPLE: `${CONTEXT} - ${this.input}`,
+          },
+        }
+      },
+    },
+    input: 'hello world',
+    props: {
+      prop1: '999',
+    },
+  })
+  console.log(res)
+})()
+```
+```js
+{ code: 5,
+  stdout: '[ \'hello\', \'world\', \'999\' ]\n',
+  stderr: 'CONTEXT - hello world\n' }
+```
+
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
 
 ## Copyright
 
-(c) [Context Testing][1] 2018
-
-[1]: https://contexttesting.com
+(c) [Context Testing][1] 2019
+    [1]: https://contexttesting.com
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/-1.svg?sanitize=true"></a></p>

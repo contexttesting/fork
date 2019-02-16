@@ -41,17 +41,17 @@
   },
   "homepage": "https://github.com/contexttesting/fork#readme",
   "devDependencies": {
-    "alamode": "1.6.0",
-    "documentary": "1.20.1",
+    "alamode": "1.8.1",
+    "documentary": "1.21.2",
     "eslint-config-artdeco": "1.0.1",
-    "reloquent": "1.2.3",
+    "reloquent": "1.2.4",
     "yarn-s": "1.1.0",
-    "zoroaster": "3.6.2"
+    "zoroaster": "3.6.7"
   },
   "dependencies": {
     "assert-diff": "2.0.3",
-    "catchment": "3.1.1",
-    "erte": "1.1.4",
+    "catchment": "3.2.2",
+    "erte": "1.1.6",
     "forkfeed": "1.0.0",
     "mismatch": "1.0.3",
     "spawncommand": "2.1.0"
