@@ -3,6 +3,7 @@
 ### 1.1.0
 
 - [doc] Document example.
+- [package] Export the module.
 - [feature] Pass the `input` and other properties in the context.
 
 ## 24 October 2018

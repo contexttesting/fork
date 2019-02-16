@@ -2,7 +2,8 @@
   "name": "@zoroaster/fork",
   "version": "1.0.0",
   "description": "Test forks.",
-  "main": "build",
+  "main": "build/index.js",
+  "module": "src/index.js",
   "scripts": {
     "t": "zoroaster -a",
     "test": "yarn t test/spec test/mask",
@@ -21,7 +22,8 @@
   },
   "files": [
     "build",
-    "types"
+    "types",
+    "src"
   ],
   "repository": {
     "type": "git",
