@@ -95,6 +95,6 @@ import fork from '@zoroaster/fork'
 ## Copyright
 
 (c) [Context Testing][1] 2019
-    [1]: https://contexttesting.com
+[1]: https://contexttesting.com
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/-1.svg?sanitize=true"></a></p>
