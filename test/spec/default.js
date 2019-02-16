@@ -1,9 +1,8 @@
 import { deepEqual } from 'zoroaster/assert'
-import throws from 'assert-throws'
+import { equal } from 'assert'
 import Context from '../context'
 import fork from '../../src'
 import Log from '../context/Log'
-import { equal } from 'assert';
 
 /** @type {Object.<string, (c: Context)>} */
 const T = {
