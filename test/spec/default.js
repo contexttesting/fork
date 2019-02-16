@@ -1,5 +1,4 @@
-import { deepEqual } from 'zoroaster/assert'
-import { equal } from 'assert'
+import { deepEqual, equal } from 'zoroaster/assert'
 import Context from '../context'
 import fork from '../../src'
 import Log from '../context/Log'
