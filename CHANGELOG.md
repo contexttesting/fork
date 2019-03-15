@@ -1,3 +1,9 @@
+## 15 March 2019
+
+### 1.1.1
+
+- [deps] Update dependencies.
+
 ## 16 February 2019
 
 ### 1.1.0
