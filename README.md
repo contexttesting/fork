@@ -46,6 +46,8 @@ __<a name="type-forkconfig">`ForkConfig`</a>__: Parameters for forking.
 | stderrInputs   | _[RegExp, string][]_                                                              | Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`).                                                                                                            | -       |
 | log            | _boolean\|{stderr: Writable, stdout: Writable}_                                   | Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. | `false` |
 | includeAnswers | _boolean_                                                                         | Whether to add the answers to the `stderr` and `stdout` output.                                                                                                                       | `true`  |
+| stripAnsi      | _boolean_                                                                         | Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result.                                                                                          | `true`  |
+| preprocess     | _(function\|{stdout?:function, stderr?:function})_                                | The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.                   | -       |
 
 _For example, to test the fork with the next code:_
 ```js
@@ -75,10 +77,19 @@ import fork from '@zoroaster/fork'
           },
         }
       },
+      preprocess(s) {
+        /* e.g., to remove whitespace at the end of each line
+          s.split('\n').map(a => a.trimRight()).join('\n')
+        */
+        return `pre-${s}`
+      },
+      /* stripAnsi: true */
     },
     input: 'hello world',
     props: {
       prop1: '999',
+      stdout: `pre-[ 'hello', 'world', '999' ]`,
+      stderr: 'pre-CONTEXT - hello world',
     },
   })
   console.log(res)
@@ -94,6 +105,8 @@ import fork from '@zoroaster/fork'
 
 ## Copyright
 
-(c) [Context Testing](https://contexttesting.com) 2019
+
+  (c) [Context Testing](https://contexttesting.com) 2019
+
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/-1.svg?sanitize=true"></a></p>
