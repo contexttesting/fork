@@ -1,3 +1,11 @@
+## 16 March 2019
+
+### 1.2.0
+
+- [feature] Allow to pre-process outputs.
+- [feature] Strip ANSI values by default.
+- [feature] Remove the last new line for when printed with `console.log`.
+
 ## 15 March 2019
 
 ### 1.1.1
