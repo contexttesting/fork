@@ -25,5 +25,11 @@
     <prop boolean name="includeAnswers" default="true">
       Whether to add the answers to the `stderr` and `stdout` output.
     </prop>
+    <prop boolean name="stripAnsi" default="true">
+      Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result.
+    </prop>
+    <prop type="(function|{stdout?:function, stderr?:function})" opt name="preprocess">
+      The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.
+    </prop>
   </type>
 </types>

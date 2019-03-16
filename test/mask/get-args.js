@@ -1,7 +1,7 @@
-import { makeTestSuite } from 'zoroaster'
+import makeTestSuite from '@zoroaster/mask'
 import getArgs from '../../src/lib/get-args'
 
-const ts = makeTestSuite('test/result/get-args.md', {
+const ts = makeTestSuite('test/result/get-args', {
   getResults(input) {
     const matches = getArgs(input)
     return matches
