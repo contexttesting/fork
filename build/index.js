@@ -9,8 +9,8 @@ let Catchment = require('catchment'); if (Catchment && Catchment.__esModule) Cat
  * Run a fork.
  * @param {Run} config Options for the run method.
  * @param {(string|ForkConfig)} config.forkConfig Either the config, or the path to the module to fork.
- * @param {string} config.input The input to the test from the test mask.
- * @param {*} [config.props="{}"] Other Properties Of The Test, Such As `stdout` And `stderr`. Default `{}`.
+ * @param {string} config.input The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.
+ * @param {*} [config.props="{}"] The properties to pass to the `getArgs` and `getOptions` as their this context. Default `{}`.
  * @param {Array<Context>} [config.contexts="[]"] The contexts for the test to be passed to `getArgs` and `getOptions`. Default `[]`.
  * @returns {Promise<{stdout: string, stderr: string, code: number}>} The result of the work, updated to contain answers in the interactive mode.
  */
@@ -30,7 +30,7 @@ const run = async (config) => {
   })
   const { promise, stdout, stdin, stderr } = fork(mod, args, options)
 
-  const { includeAnswers = true, log, inputs, stderrInputs } = forkConfig
+  const { includeAnswers = true, log, inputs, stderrInputs, stripAnsi = true, preprocess } = forkConfig
 
   const stdoutLog = new PassThrough()
   const stderrLog = new PassThrough()
@@ -69,13 +69,25 @@ const run = async (config) => {
     })
   }
 
-  assertFork(res, props)
+  assertFork(res, props, stripAnsi, preprocess)
   return res
 }
 
-const assertFork = ({ code, stdout, stderr }, props) => {
-  assertForkOutput(stdout, props.stdout)
-  assertForkOutput(stderr, props.stderr)
+const assertFork = ({ code, stdout, stderr }, props, stripAnsi, preprocess) => {
+  let stdoutPre, stderrPre
+  if (typeof preprocess == 'object') {
+    ({ stdout: stdoutPre, stderr: stderrPre } = preprocess)
+  } else if (typeof preprocess == 'function') {
+    stdoutPre = stderrPre = preprocess
+  }
+  stdout = stdout.replace(/\r?\n$/, '')
+  stderr = stderr.replace(/\r?\n$/, '')
+  const o = stripAnsi ? stdout.replace(/\033\[.*?m/g, '') : stdout
+  const e = stripAnsi ? stderr.replace(/\033\[.*?m/g, '') : stderr
+  const op = stdoutPre ? stdoutPre(o) : o
+  const ep = stderrPre ? stderrPre(e) : e
+  assertForkOutput(op, props.stdout)
+  assertForkOutput(ep, props.stderr)
   if (props.code && code != props.code)
     throw new Error(`Fork exited with code ${code} != ${props.code}`)
 }
@@ -102,13 +114,15 @@ module.exports=run
  * @prop {[RegExp, string][]} [stderrInputs] Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`).
  * @prop {boolean|{stderr: Writable, stdout: Writable}} [log=false] Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. Default `false`.
  * @prop {boolean} [includeAnswers=true] Whether to add the answers to the `stderr` and `stdout` output. Default `true`.
+ * @prop {boolean} [stripAnsi=true] Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result. Default `true`.
+ * @prop {(function|{stdout?:function, stderr?:function})} [preprocess] The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.
  */
 
 /* documentary types/run.xml */
 /**
  * @typedef {Object} Run Options for the run method.
  * @prop {(string|ForkConfig)} forkConfig Either the config, or the path to the module to fork.
- * @prop {string} input The input to the test from the test mask.
- * @prop {*} [props="{}"] Other Properties Of The Test, Such As `stdout` And `stderr`. Default `{}`.
+ * @prop {string} input The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.
+ * @prop {*} [props="{}"] The properties to pass to the `getArgs` and `getOptions` as their this context. Default `{}`.
  * @prop {Array<Context>} [contexts="[]"] The contexts for the test to be passed to `getArgs` and `getOptions`. Default `[]`.
  */
