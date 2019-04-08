@@ -1,3 +1,9 @@
+## 8 April 2019
+
+### [1.2.1](https://github.com/contexttesting/fork/compare/v1.2.0...v1.2.1)
+
+- [deps] Unfix dependencies.
+
 ## 16 March 2019
 
 ### 1.2.0
