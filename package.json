@@ -17,7 +17,7 @@
     "d1": "NODE_DEBUG=doc doc src/index.js -g",
     "build": "yarn-s d b doc",
     "rec": "NODE_DEBUG=appshot appshot -T 23 -a Terminal -y 150 -f",
-    "e": "node example",
+    "e": "alanode",
     "example/": "yarn e example/example.js"
   },
   "files": [
@@ -43,19 +43,19 @@
   },
   "homepage": "https://github.com/contexttesting/fork#readme",
   "devDependencies": {
-    "alamode": "1.8.5",
-    "documentary": "1.22.0",
+    "alamode": "^1.9.2",
+    "documentary": "^1.23.4",
     "eslint-config-artdeco": "1.0.1",
-    "reloquent": "1.2.4",
+    "reloquent": "^1.2.4",
     "yarn-s": "1.1.0",
-    "zoroaster": "3.8.5"
+    "zoroaster": "^3.11.4"
   },
   "dependencies": {
     "assert-diff": "2.0.3",
-    "catchment": "3.2.2",
-    "erte": "1.1.7",
-    "forkfeed": "1.0.0",
-    "mismatch": "1.0.3",
-    "spawncommand": "2.1.1"
+    "catchment": "^3.2.3",
+    "erte": "^1.1.7",
+    "forkfeed": "^1.0.0",
+    "mismatch": "^1.1.0",
+    "spawncommand": "^2.1.2"
   }
 }

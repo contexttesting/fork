@@ -1,4 +1,4 @@
-// preprocesses outputs
+## preprocesses outputs
 test/fixture/fork
 
 /* stdout */

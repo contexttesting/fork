@@ -22,10 +22,10 @@ This method will fork a process, and pass the inputs when `stdin` expects an inp
 %TYPEDEF types/index.xml%
 
 _For example, to test the fork with the next code:_
-%EXAMPLE: example/fork.js%
+%EXAMPLE: example/fork%
 
 _The ContextTesting/Fork can be used:_
-%EXAMPLE: example/example.js, ../src => @zoroaster/fork%
-%FORK-js example example/example%
+%EXAMPLE: example, ../src => @zoroaster/fork%
+%FORK-js example%
 
 %~%

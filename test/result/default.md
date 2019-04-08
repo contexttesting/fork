@@ -1,4 +1,4 @@
-// returns the correct output
+## returns the correct output
 test/fixture/fork
 
 /* stdout */
@@ -9,7 +9,7 @@ test
 test
 /**/
 
-// strips ANSI
+## strips ANSI
 test/fixture/ansi
 
 /* stdout */
@@ -20,7 +20,7 @@ test-stdout
 test-stderr
 /**/
 
-// is prevented from striping ANSI
+## is prevented from striping ANSI
 test/fixture/ansi
 
 /* stripAnsi */
