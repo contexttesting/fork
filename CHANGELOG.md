@@ -1,3 +1,9 @@
+## 23 April 2019
+
+### [1.2.2](https://github.com/contexttesting/fork/compare/v1.2.1...v1.2.2)
+
+- [feature] Set the assertion fail property on the error, e.g., `stdout`, `stderr` or `code`.
+
 ## 8 April 2019
 
 ### [1.2.1](https://github.com/contexttesting/fork/compare/v1.2.0...v1.2.1)
