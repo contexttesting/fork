@@ -1,4 +1,4 @@
-import { deepEqual, equal } from 'zoroaster/assert'
+import { deepEqual, equal, throws } from 'zoroaster/assert'
 import Context from '../context'
 import fork from '../../src'
 import Log from '../context/Log'
@@ -16,6 +16,38 @@ const T = {
       stdout: 'test',
       stderr: 'test',
       code: 0,
+    })
+  },
+  async 'throws errors'({ forkPath }) {
+    await throws({
+      fn: fork,
+      args: {
+        forkConfig: {
+          module: forkPath,
+        },
+        props: { stdout: 'hello' },
+      },
+      property: 'stdout',
+    })
+    await throws({
+      fn: fork,
+      args: {
+        forkConfig: {
+          module: forkPath,
+        },
+        props: { stdout: 'test', stderr: 'world' },
+      },
+      property: 'stderr',
+    })
+    await throws({
+      fn: fork,
+      args: {
+        forkConfig: {
+          module: forkPath,
+        },
+        props: { code: 123 },
+      },
+      property: 'code',
     })
   },
   async 'returns result with input'({ forkPath }) {
