@@ -64,12 +64,17 @@ export const getForkArguments = async (forkConfig, args = [], context = [], prop
   }
 }
 
-export const assertForkOutput = (actual, expected) => {
-  if (typeof expected == 'string') {
-    assertExpected(actual, expected)
-  } else if (expected) {
-    const a = JSON.parse(actual)
-    deepEqual(a, expected)
+export const assertForkOutput = (actual, expected, prop) => {
+  try {
+    if (typeof expected == 'string') {
+      assertExpected(actual, expected)
+    } else if (expected) {
+      const a = JSON.parse(actual)
+      deepEqual(a, expected)
+    }
+  } catch (err) {
+    if (prop) err.property = prop
+    throw err
   }
 }
 

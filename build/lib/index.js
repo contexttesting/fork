@@ -64,12 +64,17 @@ const { equal } = require('assert');
   }
 }
 
-       const assertForkOutput = (actual, expected) => {
-  if (typeof expected == 'string') {
-    assertExpected(actual, expected)
-  } else if (expected) {
-    const a = JSON.parse(actual)
-    deepEqual(a, expected)
+       const assertForkOutput = (actual, expected, prop) => {
+  try {
+    if (typeof expected == 'string') {
+      assertExpected(actual, expected)
+    } else if (expected) {
+      const a = JSON.parse(actual)
+      deepEqual(a, expected)
+    }
+  } catch (err) {
+    if (prop) err.property = prop
+    throw err
   }
 }
 

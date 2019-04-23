@@ -86,10 +86,14 @@ const assertFork = ({ code, stdout, stderr }, props, stripAnsi, preprocess) => {
   const e = stripAnsi ? stderr.replace(/\033\[.*?m/g, '') : stderr
   const op = stdoutPre ? stdoutPre(o) : o
   const ep = stderrPre ? stderrPre(e) : e
-  assertForkOutput(op, props.stdout)
-  assertForkOutput(ep, props.stderr)
-  if (props.code && code != props.code)
-    throw new Error(`Fork exited with code ${code} != ${props.code}`)
+  assertForkOutput(op, props.stdout, 'stdout')
+  assertForkOutput(ep, props.stderr, 'stderr')
+  if (props.code && code != props.code) {
+    const err =
+      new Error(`Fork exited with code ${code} != ${props.code}`)
+    err.property = 'code'
+    throw err
+  }
 }
 
 export default run
