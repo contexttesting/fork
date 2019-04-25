@@ -1,6 +1,6 @@
 {
   "name": "@zoroaster/fork",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Test forks.",
   "main": "build/index.js",
   "module": "src/index.js",
