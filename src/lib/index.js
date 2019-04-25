@@ -6,7 +6,7 @@ export const assertExpected = (result, expected) => {
   try {
     equal(result, expected)
   } catch (err) {
-    const e = erte(result, expected)
+    const e = erte(expected, result)
     console.log(e) // eslint-disable-line no-console
     throw err
   }
