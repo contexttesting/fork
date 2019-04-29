@@ -8,12 +8,12 @@ import fork from '@zoroaster/fork'
 
 %~%
 
-```## async fork => { stdout, stderr, code }
+```## async fork => ForkResult
 [
-  ["forkConfig", "string|ForkConfig"],
+  ["forkConfig", "string|!ForkConfig"],
   ["input", "string"],
   ["props?", "*"],
-  ["contexts?", "Context[]"]
+  ["contexts?", "!Array<!Context>"]
 ]
 ```
 
@@ -31,6 +31,7 @@ _The ContextTesting/Fork can be used:_
 ---
 
 %TYPEDEF types/index.xml%
+
 %TYPEDEF types/context.xml%
 
 %~%

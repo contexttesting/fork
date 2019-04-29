@@ -29,14 +29,18 @@
     <prop boolean name="stripAnsi" default="true">
       Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result.
     </prop>
-    <prop type="!(Preprocessor|ForkPreprocessor)" opt name="preprocess">
+    <prop type="!(_contextTesting.Preprocessor|_contextTesting.ForkPreprocessor)" opt name="preprocess">
       The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.
     </prop>
   </type>
   <type type="function(string): string" name="Preprocessor" desc="The function which processes fork's outputs before returning them for asserts.">
   </type>
   <type name="ForkPreprocessor" desc="An object with `stdout` and `stderr` preprocessors.">
-    <prop opt type="function(string): string" name="stdout"></prop>
-    <prop opt type="function(string): string" name="stderr"></prop>
+    <prop opt type="function(string): string" name="stdout">
+      How to process `stdout` before asserts.
+    </prop>
+    <prop opt type="function(string): string" name="stderr">
+      How to process `stderr` before asserts.
+    </prop>
   </type>
 </types>

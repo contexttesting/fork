@@ -12,7 +12,7 @@ yarn add -E @zoroaster/fork
 
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
-- [`async fork(forkConfig: string|ForkConfig, input: string, props?: *, contexts?: Context[]): { stdout, stderr, code }`](#async-forkforkconfig-stringforkconfiginput-stringprops-contexts-context--stdout-stderr-code-)
+- [`async fork(forkConfig: string|!ForkConfig, input: string, props?: *, contexts?: !Array<!Context>): ForkResult`](#async-forkforkconfig-stringforkconfiginput-stringprops-contexts-arraycontext-forkresult)
   * [`_contextTesting.RunFork`](#type-_contexttestingrunfork)
   * [`_contextTesting.ForkResult`](#type-_contexttestingforkresult)
   * [`_contextTesting.ForkConfig`](#type-_contexttestingforkconfig)
@@ -33,7 +33,7 @@ import fork from '@zoroaster/fork'
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
 
-## `async fork(`<br/>&nbsp;&nbsp;`forkConfig: string|ForkConfig,`<br/>&nbsp;&nbsp;`input: string,`<br/>&nbsp;&nbsp;`props?: *,`<br/>&nbsp;&nbsp;`contexts?: Context[],`<br/>`): { stdout, stderr, code }`
+## `async fork(`<br/>&nbsp;&nbsp;`forkConfig: string|!ForkConfig,`<br/>&nbsp;&nbsp;`input: string,`<br/>&nbsp;&nbsp;`props?: *,`<br/>&nbsp;&nbsp;`contexts?: !Array<!Context>,`<br/>`): ForkResult`
 
 This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
 
@@ -123,16 +123,17 @@ __<a name="type-_contexttestingforkconfig">`_contextTesting.ForkConfig`</a>__: P
 | log            | <em>(boolean \\| { stderr: Writable, stdout: Writable })</em>                                                                                                         | Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties.                            | `false` |
 | includeAnswers | <em>boolean</em>                                                                                                                                                      | Whether to add the answers to the `stderr` and `stdout` output.                                                                                                                                                  | `true`  |
 | stripAnsi      | <em>boolean</em>                                                                                                                                                      | Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result.                                                                                                                     | `true`  |
-| preprocess     | <em>(Preprocessor \\| ForkPreprocessor)</em>                                                                                                                          | The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.                                              | -       |
+| preprocess     | <em>([_contextTesting.Preprocessor](#type-_contexttestingpreprocessor) \\| [_contextTesting.ForkPreprocessor](#type-_contexttestingforkpreprocessor))</em>            | The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.                                              | -       |
 
 `function(string): string` __<a name="type-_contexttestingpreprocessor">`_contextTesting.Preprocessor`</a>__: The function which processes fork's outputs before returning them for asserts.
 
 __<a name="type-_contexttestingforkpreprocessor">`_contextTesting.ForkPreprocessor`</a>__: An object with `stdout` and `stderr` preprocessors.
 
-|  Name  |               Type                |                                  Description                                  |
-| ------ | --------------------------------- | ----------------------------------------------------------------------------- |
-| stdout | <em>function(string): string</em> | &lt;/prop&gt;
-    &lt;prop opt type="function(string): string" name="stderr"> |
+|  Name  |               Type                |               Description               |
+| ------ | --------------------------------- | --------------------------------------- |
+| stdout | <em>function(string): string</em> | How to process `stdout` before asserts. |
+| stderr | <em>function(string): string</em> | How to process `stderr` before asserts. |
+
 __<a name="type-_contexttestingcontext">`_contextTesting.Context`</a>__: A context made with a constructor.
 
 |   Name   |                   Type                    |               Description               |
