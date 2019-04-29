@@ -4,7 +4,7 @@
       Either the config, or the path to the module to fork.
     </prop>
     <prop string name="input">
-      The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.
+      The input to the test from the mask's result. It will be converted into an array of strings to become arguments to pass to the fork.
     </prop>
     <prop opt name="props">
       The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.

@@ -42,7 +42,7 @@ __<a name="type-_contexttestingrunfork">`_contextTesting.RunFork`</a>__: Options
 |      Name       |                                         Type                                         |                                                             Description                                                              |
 | --------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | __forkConfig*__ | <em>(string \\| [!_contextTesting.ForkConfig](#type-_contexttestingforkconfig))</em> | Either the config, or the path to the module to fork.                                                                                |
-| __input*__      | <em>string</em>                                                                      | The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.                      |
+| __input*__      | <em>string</em>                                                                      | The input to the test from the mask's result. It will be converted into an array of strings to become arguments to pass to the fork. |
 | props           | <em>*</em>                                                                           | The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result. |
 | contexts        | <em>!Array&lt;[_contextTesting.Context](#type-_contexttestingcontext)&gt;</em>       | The contexts for the test to be passed to `getArgs` and `getOptions`.                                                                |
 
@@ -108,7 +108,7 @@ import fork from '@zoroaster/fork'
 
 ---
 
-`import('child_process').ForkOptions` __<a name="type-child_processforkoptions">`child_process.ForkOptions`</a>__
+[`import('child_process').ForkOptions`](https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options) __<a name="type-child_processforkoptions">`child_process.ForkOptions`</a>__
 
 __<a name="type-_contexttestingforkconfig">`_contextTesting.ForkConfig`</a>__: Parameters for forking.
 
