@@ -1,10 +1,10 @@
-import { deepEqual } from 'assert-diff'
+import deepEqual from '@zoroaster/deep-equal'
 import erte from 'erte'
-import { equal } from 'assert'
+import { strictEqual } from 'assert'
 
 export const assertExpected = (result, expected) => {
   try {
-    equal(result, expected)
+    strictEqual(result, expected)
   } catch (err) {
     const e = erte(expected, result)
     console.log(e) // eslint-disable-line no-console
@@ -69,7 +69,8 @@ export const assertForkOutput = (actual, expected, prop) => {
       deepEqual(a, expected)
     }
   } catch (err) {
-    if (prop) err.property = prop
+    // set 'property' to interactively update masks on fail via @zoroaster/mask
+    if (prop) err['property'] = prop
     throw err
   }
 }

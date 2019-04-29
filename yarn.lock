@@ -96,6 +96,13 @@
   dependencies:
     erotic "^2.1.0"
 
+"@zoroaster/deep-equal@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@zoroaster/deep-equal/-/deep-equal-1.0.0.tgz#800e0f0c99ab612ca03cec2706479ff12472a039"
+  integrity sha512-gooWyvN+dQzhw1xrVMIyFNcW02upRx7ysYhwchMRAE5OmHPEAjgeRZzj6KgNHfRQyLoOUKP0QQ6JCoQAo2i8XA==
+  dependencies:
+    differently "^1.0.0"
+
 "@zoroaster/fork@^1.2.2":
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@zoroaster/fork/-/fork-1.2.3.tgz#365ce33bc7aea31dc7e9f415cd5031709e1f09e7"
@@ -197,10 +204,12 @@ diff@3.5.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
   integrity sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
 
-diff@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.1.tgz#0c667cb467ebbb5cea7f14f135cc2dba7780a8ff"
-  integrity sha512-s2+XdvhPCOF01LRQBC8hf4vhbVmI2CGS5aZnxLJlT5FtdhPCDFq80q++zK2KlrVorVDdL5BOGZ/VfLrVtYNF+Q==
+differently@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/differently/-/differently-1.0.0.tgz#f5d971d68f5feaa2046792392dcb3aab71bc791c"
+  integrity sha512-r0cMQHGHr1d8TUTugqnYAY+7hxMBPEXAChi2sRIrnR/Gnx4mmRXCTvKGnFrNWUD7v7e71/FvFfRpw2sKJ/51TA==
+  dependencies:
+    erte "^1.2.0"
 
 difflib@~0.2.1:
   version "0.2.4"
@@ -266,12 +275,10 @@ erte@1.1.4:
   dependencies:
     diff "3.5.0"
 
-erte@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/erte/-/erte-1.1.7.tgz#6402500055d615a57493048729f524c1072749d9"
-  integrity sha512-GFYXicFCaoQHhIQ1KrIbihebMpH1BeXcRkbKDKzCcW4UgczhoyWzCvd79MlAeHGuJ8+Jirtm8tHC91AQ0GPa0A==
-  dependencies:
-    diff "4.0.1"
+erte@^1.1.7, erte@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/erte/-/erte-1.2.0.tgz#8b7dbf6ad822d96f071947d20d5f440623f10769"
+  integrity sha512-saxyNviRCvFENCyZ66O58cY8icaraVeQOgGks6ujsBeS7zf3yyjXrhyfMpERZo7SJH1KKdXcSQqgemxW6eIpjA==
 
 es5-ext@0.8.x:
   version "0.8.2"

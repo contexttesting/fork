@@ -7,12 +7,12 @@ import Catchment from 'catchment'
 
 /**
  * Run a fork.
- * @param {!_contextTesting.RunFork} config Options for the run method.
- * @param {string|!_contextTesting.ForkConfig} config.forkConfig Either the config, or the path to the module to fork.
+ * @param {_contextTesting.RunFork} config Options for the run method.
+ * @param {string|_contextTesting.ForkConfig} config.forkConfig Either the config, or the path to the module to fork.
  * @param {string} config.input The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.
  * @param {*} [config.props] The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.
  * @param {!Array<_contextTesting.Context>} [config.contexts] The contexts for the test to be passed to `getArgs` and `getOptions`.
- * @returns {Promise<{stdout: string, stderr: string, code: number}>} The result of the work, updated to contain answers in the interactive mode.
+ * @returns {!Promise<_contextTesting.ForkResult>} The result of the work, updated to contain answers in the interactive mode.
  */
 const run = async (config) => {
   const {

@@ -1,10 +1,10 @@
-const { deepEqual } = require('assert-diff');
+let deepEqual = require('@zoroaster/deep-equal'); if (deepEqual && deepEqual.__esModule) deepEqual = deepEqual.default;
 let erte = require('erte'); if (erte && erte.__esModule) erte = erte.default;
-const { equal } = require('assert');
+const { strictEqual } = require('assert');
 
        const assertExpected = (result, expected) => {
   try {
-    equal(result, expected)
+    strictEqual(result, expected)
   } catch (err) {
     const e = erte(expected, result)
     console.log(e) // eslint-disable-line no-console
@@ -13,18 +13,14 @@ const { equal } = require('assert');
 }
 
 /**
- * @param {string|ForkConfig} forkConfig Parameters for forking.
- * @param {string} forkConfig.module The path to the module to fork.
- * @param {(args: string[], ...contexts?: Context[]) => string[]|Promise.<string[]>} [forkConfig.getArgs] The function to get arguments to pass the forked processed based on parsed masks input and contexts.
- * @param {(...contexts?: Context[]) => ForkOptions} [forkConfig.getOptions] The function to get options for the forked processed, such as `ENV` and `cwd`, based on contexts.
- * @param {ForkOptions} [forkConfig.options] Options for the forked processed, such as `ENV` and `cwd`.
- * @param {string[]} args
- * @param {Context[]} contexts
+ * @param {string|!_contextTesting.ForkConfig} forkConfig Parameters for forking.
+ * @param {!Array<string>} args The arguments to the fork
+ * @param {!Array<!_contextTesting.Context>} contexts The array of contexts.
  * @param {*} props The props found in the mask.
  */
        const getForkArguments = async (forkConfig, args = [], context = [], props = {}) => {
   /**
-   * @type {ForkOptions}
+   * @type {!child_process.ForkOptions}
    */
   const stdioOpts = {
     stdio: 'pipe',
@@ -73,15 +69,19 @@ const { equal } = require('assert');
       deepEqual(a, expected)
     }
   } catch (err) {
-    if (prop) err.property = prop
+    // set 'property' to interactively update masks on fail via @zoroaster/mask
+    if (prop) err['property'] = prop
     throw err
   }
 }
 
 /**
- * @typedef {import('..').Context} Context
- * @typedef {import('..').ForkOptions} ForkOptions
- * @typedef {import('..').ForkConfig} ForkConfig
+ * @suppress {nonStandardJsDocs}
+ * @typedef {import('child_process').ForkOptions} child_process.ForkOptions
+ */
+/**
+ * @typedef {import('..').Context} _contextTesting.Context
+ * @typedef {import('..').ForkConfig} _contextTesting.ForkConfig
  */
 
 module.exports.assertExpected = assertExpected
