@@ -28,10 +28,4 @@ _The ContextTesting/Fork can be used:_
 %EXAMPLE: example, ../src => @zoroaster/fork%
 %FORK-js example%
 
----
-
-%TYPEDEF types/index.xml%
-
-%TYPEDEF types/context.xml%
-
 %~%
