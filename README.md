@@ -129,10 +129,10 @@ __<a name="type-_contexttestingforkconfig">`_contextTesting.ForkConfig`</a>__: P
 
 __<a name="type-_contexttestingforkpreprocessor">`_contextTesting.ForkPreprocessor`</a>__: An object with `stdout` and `stderr` preprocessors.
 
-|  Name  |               Type                |               Description               |
-| ------ | --------------------------------- | --------------------------------------- |
-| stdout | <em>function(string): string</em> | How to process `stdout` before asserts. |
-| stderr | <em>function(string): string</em> | How to process `stderr` before asserts. |
+|  Name  |                                    Type                                    |               Description               |
+| ------ | -------------------------------------------------------------------------- | --------------------------------------- |
+| stdout | <em>[_contextTesting.Preprocessor](#type-_contexttestingpreprocessor)</em> | How to process `stdout` before asserts. |
+| stderr | <em>[_contextTesting.Preprocessor](#type-_contexttestingpreprocessor)</em> | How to process `stderr` before asserts. |
 
 __<a name="type-_contexttestingcontext">`_contextTesting.Context`</a>__: A context made with a constructor.
 
