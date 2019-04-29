@@ -8,8 +8,8 @@ let Catchment = require('catchment'); if (Catchment && Catchment.__esModule) Cat
 /**
  * Run a fork.
  * @param {_contextTesting.RunFork} config Options for the run method.
- * @param {string|_contextTesting.ForkConfig} config.forkConfig Either the config, or the path to the module to fork.
- * @param {string} config.input The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.
+ * @param {(string|_contextTesting.ForkConfig)} config.forkConfig Either the config, or the path to the module to fork.
+ * @param {string} config.input The input to the test from the mask's result. It will be converted into an array of strings to become arguments to pass to the fork.
  * @param {*} [config.props] The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.
  * @param {!Array<_contextTesting.Context>} [config.contexts] The contexts for the test to be passed to `getArgs` and `getOptions`.
  * @returns {!Promise<_contextTesting.ForkResult>} The result of the work, updated to contain answers in the interactive mode.
@@ -50,8 +50,18 @@ const run = async (config) => {
   if (needsStdoutAnswers) co = new Catchment({ rs: stdoutLog })
   if (needsStderrAnswers) ce = new Catchment({ rs: stderrLog })
 
-  forkFeed(stdout, stdin, inputs, stdoutLog)
-  forkFeed(stderr, stdin, stderrInputs, stderrLog)
+  /**
+   * @suppress {checkTypes}
+   * @type {stream.Writable}
+   */
+  const _stdoutLog = stdoutLog
+  /**
+   * @suppress {checkTypes}
+   * @type {stream.Writable}
+   */
+  const _stderrLog = stderrLog
+  forkFeed(stdout, stdin, inputs, _stdoutLog)
+  forkFeed(stderr, stdin, stderrInputs, _stderrLog)
 
   const res = await promise
 
@@ -124,10 +134,10 @@ module.exports=run
  * @prop {!child_process.ForkOptions} [options] Options for the forked processed, such as `ENV` and `cwd`.
  * @prop {!Array<!Array<(!RegExp|string)>>} [inputs] Inputs to push to `stdin` when `stdout` writes data. The inputs are kept on stack, and taken off the stack when the RegExp matches the written data, e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`.
  * @prop {!Array<!Array<(!RegExp|string)>>} [stderrInputs] Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`), e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`.
- * @prop {boolean|{stderr: Writable, stdout: Writable}} [log=false] Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. Default `false`.
+ * @prop {boolean|{stderr: (stream.Writable|NodeJS.WriteStream), stdout: (stream.Writable|NodeJS.WriteStream)}} [log=false] Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. Default `false`.
  * @prop {boolean} [includeAnswers=true] Whether to add the answers to the `stderr` and `stdout` output. Default `true`.
  * @prop {boolean} [stripAnsi=true] Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result. Default `true`.
- * @prop {!(Preprocessor|ForkPreprocessor)} [preprocess] The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.
+ * @prop {!(_contextTesting.Preprocessor|_contextTesting.ForkPreprocessor)} [preprocess] The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.
  */
 /**
  * @suppress {nonStandardJsDocs}
@@ -144,8 +154,8 @@ module.exports=run
 /**
  * @suppress {nonStandardJsDocs}
  * @typedef {Object} _contextTesting.ForkPreprocessor An object with `stdout` and `stderr` preprocessors.
- * @prop {function(string): string} [stdout] </prop>
-    <prop opt type="function(string): string" name="stderr">
+ * @prop {_contextTesting.Preprocessor} [stdout] How to process `stdout` before asserts.
+ * @prop {_contextTesting.Preprocessor} [stderr] How to process `stderr` before asserts.
  */
 /**
  * @suppress {nonStandardJsDocs}
@@ -160,8 +170,8 @@ module.exports=run
 /**
  * @suppress {nonStandardJsDocs}
  * @typedef {Object} _contextTesting.RunFork Options for the run method.
- * @prop {string|!_contextTesting.ForkConfig} forkConfig Either the config, or the path to the module to fork.
- * @prop {string} input The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.
+ * @prop {(string|!_contextTesting.ForkConfig)} forkConfig Either the config, or the path to the module to fork.
+ * @prop {string} input The input to the test from the mask's result. It will be converted into an array of strings to become arguments to pass to the fork.
  * @prop {*} [props] The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.
  * @prop {!Array<_contextTesting.Context>} [contexts] The contexts for the test to be passed to `getArgs` and `getOptions`.
  */

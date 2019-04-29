@@ -13,19 +13,16 @@ const { strictEqual } = require('assert');
 }
 
 /**
- * @param {string|!_contextTesting.ForkConfig} forkConfig Parameters for forking.
+ * @param {string|_contextTesting.ForkConfig} forkConfig Parameters for forking.
  * @param {!Array<string>} args The arguments to the fork
- * @param {!Array<!_contextTesting.Context>} contexts The array of contexts.
+ * @param {!Array<_contextTesting.Context>} contexts The array of contexts.
  * @param {*} props The props found in the mask.
  */
-       const getForkArguments = async (forkConfig, args = [], context = [], props = {}) => {
-  /**
-   * @type {!child_process.ForkOptions}
-   */
-  const stdioOpts = {
+       const getForkArguments = async (forkConfig, args = [], contexts = [], props = {}) => {
+  const stdioOpts = /** @type {!child_process.ForkOptions} */ ({
     stdio: 'pipe',
     execArgv: [],
-  }
+  })
   if (typeof forkConfig == 'string') {
     return {
       mod: forkConfig,
@@ -39,7 +36,7 @@ const { strictEqual } = require('assert');
     options,
     getOptions,
   } = forkConfig
-  const a = getArgs ? await getArgs.call(props, args, ...context) : args
+  const a = getArgs ? await getArgs.call(props, args, ...contexts) : args
   let opt = stdioOpts
   if (options) {
     opt = {
@@ -47,7 +44,7 @@ const { strictEqual } = require('assert');
       ...options,
     }
   } else if (getOptions) {
-    const o = await getOptions.call(props, ...context)
+    const o = await getOptions.call(props, ...contexts)
     opt = {
       ...stdioOpts,
       ...o,
@@ -80,7 +77,11 @@ const { strictEqual } = require('assert');
  * @typedef {import('child_process').ForkOptions} child_process.ForkOptions
  */
 /**
+ * @suppress {nonStandardJsDocs}
  * @typedef {import('..').Context} _contextTesting.Context
+ */
+/**
+ * @suppress {nonStandardJsDocs}
  * @typedef {import('..').ForkConfig} _contextTesting.ForkConfig
  */
 
