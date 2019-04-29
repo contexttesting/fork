@@ -96,10 +96,10 @@
   dependencies:
     erotic "^2.1.0"
 
-"@zoroaster/deep-equal@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@zoroaster/deep-equal/-/deep-equal-1.0.0.tgz#800e0f0c99ab612ca03cec2706479ff12472a039"
-  integrity sha512-gooWyvN+dQzhw1xrVMIyFNcW02upRx7ysYhwchMRAE5OmHPEAjgeRZzj6KgNHfRQyLoOUKP0QQ6JCoQAo2i8XA==
+"@zoroaster/deep-equal@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@zoroaster/deep-equal/-/deep-equal-1.0.1.tgz#7f7b72f59e54807ee23ea88e60f99165f10ca876"
+  integrity sha512-Nc8v2oW+Xtw/49SbgloPkln1v/H7D4fr7HGdgKr4rpdggk8pZRF2vNLaugm6OhiKhb0OuO/gHuk8o5qjH+strA==
   dependencies:
     differently "^1.0.0"
 
@@ -205,9 +205,9 @@ diff@3.5.0:
   integrity sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
 
 differently@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/differently/-/differently-1.0.0.tgz#f5d971d68f5feaa2046792392dcb3aab71bc791c"
-  integrity sha512-r0cMQHGHr1d8TUTugqnYAY+7hxMBPEXAChi2sRIrnR/Gnx4mmRXCTvKGnFrNWUD7v7e71/FvFfRpw2sKJ/51TA==
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/differently/-/differently-1.0.1.tgz#1a5c158fd98c686f9310a05899a59ac1a4bd6d08"
+  integrity sha512-J19iW+g47ww6ReGwZrthgeHQlKLN02zHAXPwG21BHCi8G03qv1G9YGrqYDmwws9uvtKRBY9b91DhJ4VbfWFNQQ==
   dependencies:
     erte "^1.2.0"
 
@@ -294,6 +294,11 @@ forkfeed@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/forkfeed/-/forkfeed-1.0.0.tgz#e519201d8f3809a0802b72347066a0a772f0629b"
   integrity sha512-E8O9yqYwJLxyExwKLAbDe/Mw20fUuxwplFB/h8lpRQWgKrPcih3uuVKPyXqcJ0N/iPHJMHV6ZH1iFjIkRYvaFw==
+
+forkfeed@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/forkfeed/-/forkfeed-1.1.1.tgz#4f7ead1264d8adf5fa9450a4db70940ad782a532"
+  integrity sha512-IfMY73d7Ezyyfo6IfE1+gcWUf9d+z+QJ6LmMIRrtl6N5PGI7DLP1oPLaF5RnsoCTCa7VwIk/0KSlahU/m3w8pA==
 
 fpj@^1.3.0:
   version "1.3.0"

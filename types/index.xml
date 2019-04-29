@@ -20,7 +20,7 @@
     <prop opt name="stderrInputs" type="Array<[RegExp, string]>" closure="!Array<!Array<(!RegExp|string)>>">
       Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`), e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`.
     </prop>
-    <prop name="log" default="false" type="boolean|{stderr: Writable, stdout: Writable}">
+    <prop name="log" default="false" type="boolean|{stderr: !(stream.Writable|NodeJS.WriteStream), stdout: !(stream.Writable|NodeJS.WriteStream)}">
       Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties.
     </prop>
     <prop boolean name="includeAnswers" default="true">

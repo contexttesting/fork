@@ -12,6 +12,7 @@
     "test-build": "ALAMODE_ENV=test-build yarn test",
     "lint": "eslint .",
     "doc": "NODE_DEBUG=doc doc -o README.md",
+    "depack": "GOOGLE_CLOSURE_COMPILER=/Volumes/backup/closure-compiler/target/closure-compiler-1.0-SNAPSHOT.jar depack example -c -a -p -o example/depack.js --externs externs.js -s",
     "b": "alamode src -o build -s",
     "d": "yarn-s d1 externs",
     "d1": "typal src/index.js -c",
@@ -53,10 +54,10 @@
     "zoroaster": "^3.13.0"
   },
   "dependencies": {
-    "@zoroaster/deep-equal": "^1.0.0",
+    "@zoroaster/deep-equal": "^1.0.1",
     "catchment": "^3.3.0",
     "erte": "^1.2.0",
-    "forkfeed": "^1.0.0",
+    "forkfeed": "^1.1.1",
     "mismatch": "^1.2.0",
     "spawncommand": "^2.2.0"
   }

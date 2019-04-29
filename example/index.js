@@ -2,6 +2,7 @@
 import fork from '../src'
 
 (async () => {
+  /** @suppress {checkTypes} */
   const res = await fork({
     contexts: ['CONTEXT'],
     forkConfig: {
@@ -12,7 +13,7 @@ import fork from '../src'
       getOptions(CONTEXT) {
         return {
           env: {
-            EXAMPLE: `${CONTEXT} - ${this.input}`,
+            'EXAMPLE': `${CONTEXT} - ${this.input}`,
           },
         }
       },
@@ -27,8 +28,8 @@ import fork from '../src'
     input: 'hello world',
     props: {
       prop1: '999',
-      stdout: `pre-[ 'hello', 'world', '999' ]`,
-      stderr: 'pre-CONTEXT - hello world',
+      'stdout': `pre-[ 'hello', 'world', '999' ]`,
+      'stderr': 'pre-CONTEXT - hello world',
     },
   })
   console.log(res)

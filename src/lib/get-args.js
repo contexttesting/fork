@@ -6,7 +6,7 @@ import mismatch from 'mismatch'
  */
 const getArgs = (input) => {
   const res = mismatch(/(['"])?([\s\S]+?)\1(\s+|$)/g, input, ['q', 'a'])
-    .map(({ a }) => a)
+    .map(({ 'a': a }) => a)
   return res
 }
 

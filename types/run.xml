@@ -1,6 +1,6 @@
 <types namespace="_contextTesting">
   <type name="RunFork" desc="Options for the run method.">
-    <prop type="string|!_contextTesting.ForkConfig" name="forkConfig">
+    <prop type="(string|!_contextTesting.ForkConfig)" name="forkConfig">
       Either the config, or the path to the module to fork.
     </prop>
     <prop string name="input">
