@@ -19,7 +19,7 @@ import fork from '@zoroaster/fork'
 
 This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
 
-%TYPEDEF types/index.xml%
+%TYPEDEF types/run.xml%
 
 _For example, to test the fork with the next code:_
 %EXAMPLE: example/fork%
@@ -27,5 +27,10 @@ _For example, to test the fork with the next code:_
 _The ContextTesting/Fork can be used:_
 %EXAMPLE: example, ../src => @zoroaster/fork%
 %FORK-js example%
+
+---
+
+%TYPEDEF types/index.xml%
+%TYPEDEF types/context.xml%
 
 %~%
