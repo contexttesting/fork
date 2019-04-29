@@ -13,18 +13,14 @@ export const assertExpected = (result, expected) => {
 }
 
 /**
- * @param {string|ForkConfig} forkConfig Parameters for forking.
- * @param {string} forkConfig.module The path to the module to fork.
- * @param {(args: string[], ...contexts?: Context[]) => string[]|Promise.<string[]>} [forkConfig.getArgs] The function to get arguments to pass the forked processed based on parsed masks input and contexts.
- * @param {(...contexts?: Context[]) => ForkOptions} [forkConfig.getOptions] The function to get options for the forked processed, such as `ENV` and `cwd`, based on contexts.
- * @param {ForkOptions} [forkConfig.options] Options for the forked processed, such as `ENV` and `cwd`.
- * @param {string[]} args
- * @param {Context[]} contexts
+ * @param {string|!_contextTesting.ForkConfig} forkConfig Parameters for forking.
+ * @param {!Array<string>} args The arguments to the fork
+ * @param {!Array<!_contextTesting.Context>} contexts The array of contexts.
  * @param {*} props The props found in the mask.
  */
 export const getForkArguments = async (forkConfig, args = [], context = [], props = {}) => {
   /**
-   * @type {ForkOptions}
+   * @type {!child_process.ForkOptions}
    */
   const stdioOpts = {
     stdio: 'pipe',
@@ -79,7 +75,10 @@ export const assertForkOutput = (actual, expected, prop) => {
 }
 
 /**
- * @typedef {import('..').Context} Context
- * @typedef {import('..').ForkOptions} ForkOptions
- * @typedef {import('..').ForkConfig} ForkConfig
+ * @suppress {nonStandardJsDocs}
+ * @typedef {import('child_process').ForkOptions} child_process.ForkOptions
+ */
+/**
+ * @typedef {import('..').Context} _contextTesting.Context
+ * @typedef {import('..').ForkConfig} _contextTesting.ForkConfig
  */

@@ -1,16 +1,27 @@
-<types>
-  <type name="Run" desc="Options for the run method.">
-    <prop type="(string|ForkConfig)" name="forkConfig">
+<types namespace="_contextTesting">
+  <type name="RunFork" desc="Options for the run method.">
+    <prop type="string|!_contextTesting.ForkConfig" name="forkConfig">
       Either the config, or the path to the module to fork.
     </prop>
     <prop string name="input">
       The input to the test from the test mask to set on the `this.input` property of the `getArgs` and `getOptions`.
     </prop>
-    <prop name="props" default="{}">
-      The properties to pass to the `getArgs` and `getOptions` as their this context.
+    <prop opt name="props">
+      The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.
     </prop>
-    <prop type="Array<Context>" name="contexts" default="[]">
+    <prop opt type="!Array<_contextTesting.Context>" name="contexts">
       The contexts for the test to be passed to `getArgs` and `getOptions`.
+    </prop>
+  </type>
+  <type name="ForkResult">
+    <prop type="string" name="stdout">
+      The output from the `stdout` stream, possibly with answers fed to `stdin`.
+    </prop>
+    <prop type="string" name="stderr">
+      The output from the `stderr` stream,  possibly with answers fed to `stdin`.
+    </prop>
+    <prop type="number" name="code">
+      The code with which the process exited.
     </prop>
   </type>
 </types>

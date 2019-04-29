@@ -13,18 +13,20 @@
     "lint": "eslint .",
     "doc": "NODE_DEBUG=doc doc documentary -o README.md",
     "b": "alamode src -o build -s",
-    "d": "yarn-s d1",
-    "d1": "NODE_DEBUG=doc doc src/index.js -g",
+    "d": "yarn-s d1 externs",
+    "d1": "typal src/index.js -c",
     "build": "yarn-s d b doc",
-    "rec": "NODE_DEBUG=appshot appshot -T 23 -a Terminal -y 150 -f",
     "e": "alanode",
-    "example/": "yarn e example/example.js"
+    "example/": "yarn e example/example.js",
+    "externs": "typal externs.js -e"
   },
   "files": [
     "build",
     "types",
-    "src"
+    "src",
+    "externs.js"
   ],
+  "externs": "externs.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/contexttesting/fork.git"
