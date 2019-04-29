@@ -69,6 +69,7 @@ _The ContextTesting/Fork can be used:_
 import fork from '@zoroaster/fork'
 
 (async () => {
+  /** @suppress {checkTypes} */
   const res = await fork({
     contexts: ['CONTEXT'],
     forkConfig: {
@@ -79,7 +80,7 @@ import fork from '@zoroaster/fork'
       getOptions(CONTEXT) {
         return {
           env: {
-            EXAMPLE: `${CONTEXT} - ${this.input}`,
+            'EXAMPLE': `${CONTEXT} - ${this.input}`,
           },
         }
       },
@@ -94,8 +95,8 @@ import fork from '@zoroaster/fork'
     input: 'hello world',
     props: {
       prop1: '999',
-      stdout: `pre-[ 'hello', 'world', '999' ]`,
-      stderr: 'pre-CONTEXT - hello world',
+      'stdout': `pre-[ 'hello', 'world', '999' ]`,
+      'stderr': 'pre-CONTEXT - hello world',
     },
   })
   console.log(res)
@@ -125,7 +126,7 @@ __<a name="type-forkconfig">`ForkConfig`</a>__: Parameters for forking.
 | options        | <em>[!child_process.ForkOptions](#type-child_processforkoptions)</em>                                                                 | Options for the forked processed, such as `ENV` and `cwd`.                                                                                                                                                       | -       |
 | inputs         | <em>Array&lt;[RegExp, string]&gt;</em>                                                                                                | Inputs to push to `stdin` when `stdout` writes data. The inputs are kept on stack, and taken off the stack when the RegExp matches the written data, e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`. | -       |
 | stderrInputs   | <em>Array&lt;[RegExp, string]&gt;</em>                                                                                                | Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`), e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`.                                                                           | -       |
-| log            | <em>(boolean \\| { stderr: Writable, stdout: Writable })</em>                                                                         | Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties.                            | `false` |
+| log            | <em>(boolean \\| { stderr: (stream.Writable \\| NodeJS.WriteStream), stdout: (stream.Writable \\| NodeJS.WriteStream) })</em>         | Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties.                            | `false` |
 | includeAnswers | <em>boolean</em>                                                                                                                      | Whether to add the answers to the `stderr` and `stdout` output.                                                                                                                                                  | `true`  |
 | stripAnsi      | <em>boolean</em>                                                                                                                      | Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result.                                                                                                                     | `true`  |
 | preprocess     | <em>([Preprocessor](#type-preprocessor) \\| [ForkPreprocessor](#type-forkpreprocessor))</em>                                          | The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.                                              | -       |
