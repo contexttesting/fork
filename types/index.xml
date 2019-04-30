@@ -5,10 +5,10 @@
     <prop string name="module">
       The path to the module to fork.
     </prop>
-    <prop opt name="getArgs" type="function(!Array<string>, ..._contextTesting.Context): !Array<string>|!Promise<!Array<string>>">
+    <prop opt name="getArgs" type="(function(this: *, !Array<string>, ..._contextTesting.Context): !Array<string>|!Promise<!Array<string>>)">
       The function to get arguments to pass the fork based on the parsed mask input and contexts.
     </prop>
-    <prop opt name="getOptions" type="function(..._contextTesting.Context): !child_process.ForkOptions">
+    <prop opt name="getOptions" type="(function(this: *, ..._contextTesting.Context): !child_process.ForkOptions)">
       The function to get options for the fork, such as `ENV` and `cwd`, based on contexts.
     </prop>
     <prop opt name="options" type="!child_process.ForkOptions">

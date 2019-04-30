@@ -31,12 +31,12 @@ _contextTesting.ForkConfig
 _contextTesting.ForkConfig.prototype.module
 /**
  * The function to get arguments to pass the fork based on the parsed mask input and contexts.
- * @type {(function(!Array<string>, ..._contextTesting.Context): !Array<string>|!Promise<!Array<string>>|undefined)}
+ * @type {((function(this: *, !Array<string>, ..._contextTesting.Context): !Array<string>|!Promise<!Array<string>>)|undefined)}
  */
 _contextTesting.ForkConfig.prototype.getArgs
 /**
  * The function to get options for the fork, such as `ENV` and `cwd`, based on contexts.
- * @type {(function(..._contextTesting.Context): !child_process.ForkOptions|undefined)}
+ * @type {((function(this: *, ..._contextTesting.Context): !child_process.ForkOptions)|undefined)}
  */
 _contextTesting.ForkConfig.prototype.getOptions
 /**

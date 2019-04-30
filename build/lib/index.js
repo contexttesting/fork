@@ -78,12 +78,13 @@ const { strictEqual } = require('assert');
  */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {import('..').Context} _contextTesting.Context
+ * @typedef {import('../../types').Context} _contextTesting.Context
  */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {import('..').ForkConfig} _contextTesting.ForkConfig
+ * @typedef {import('../../types').ForkConfig} _contextTesting.ForkConfig
  */
+
 
 module.exports.assertExpected = assertExpected
 module.exports.getForkArguments = getForkArguments
