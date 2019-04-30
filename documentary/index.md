@@ -2,10 +2,10 @@
 
 %NPM: @zoroaster/fork%
 
-`@zoroaster/fork` is used in _Zoroaster_ to test forks.
+`@zoroaster/fork` is used in _Zoroaster_ to test forks. It is part of the [`@zoroaster/mask`](https://github.com/contexttesting/mask) package which uses it to compare forks' output against the results written in non-js files. Nevertheless, the package can be used on its own to spawn and test forks &mdash; the library allows to fork a process and then asserts on the `stderr`, `stdout` and `code` properties, if they are passed, and returns the actual values if the assertions passed.
 
 ```sh
-yarn add -E @zoroaster/fork
+yarn add @zoroaster/fork
 ```
 
 ## Table Of Contents

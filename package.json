@@ -14,18 +14,20 @@
     "doc": "NODE_DEBUG=doc doc -o README.md -n _contextTesting",
     "depack": "GOOGLE_CLOSURE_COMPILER=/Volumes/backup/closure-compiler/target/closure-compiler-1.0-SNAPSHOT.jar depack example -c -a -p -o example/depack.js --externs externs.js -s",
     "b": "alamode src -o build -s",
-    "d": "yarn-s d1 externs",
-    "d1": "typal src/index.js -c",
     "build": "yarn-s d b doc",
     "e": "alanode",
     "example/": "yarn e example/example.js",
-    "externs": "typal externs.js -e"
+    "d": "yarn-s d1 externs types",
+    "d1": "typal src/index.js -c -t types/run.xml",
+    "externs": "typal externs.js -e",
+    "types": "typal types.js"
   },
   "files": [
     "build",
     "types",
     "src",
-    "externs.js"
+    "externs.js",
+    "types.js"
   ],
   "externs": "externs.js",
   "repository": {
