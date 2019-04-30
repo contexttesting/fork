@@ -1,3 +1,10 @@
+## 1 May 2019
+
+### [1.3.1](https://github.com/contexttesting/fork/compare/v1.3.0...v1.3.1)
+
+- [externs] Correct the optional types.
+- [types] Import `stream.Writable`.
+
 ## 30 April 2019
 
 ### [1.3.0](https://github.com/contexttesting/fork/compare/v1.2.3...v1.3.0)
