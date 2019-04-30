@@ -1,3 +1,11 @@
+## 30 April 2019
+
+### [1.3.0](https://github.com/contexttesting/fork/compare/v1.2.3...v1.3.0)
+
+- [types] Move all types to a separate file, tidy up all types for _Google Closure Compiler_ and _Depack_.
+- [externs] Publish externs.
+- [deps] Switch to using `@zoroaster/deep-equal` instead of `assert-diff`.
+
 ## 25 April 2019
 
 ### [1.2.3](https://github.com/contexttesting/fork/compare/v1.2.2...v1.2.3)
