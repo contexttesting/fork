@@ -49,9 +49,9 @@
   "homepage": "https://github.com/contexttesting/fork#readme",
   "devDependencies": {
     "alamode": "^2.0.0",
-    "documentary": "^1.26.2",
+    "documentary": "^1.26.5",
     "eslint-config-artdeco": "1.0.1",
-    "reloquent": "^1.2.4",
+    "reloquent": "^1.3.0",
     "yarn-s": "1.1.0",
     "zoroaster": "^3.13.0"
   },

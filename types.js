@@ -44,6 +44,9 @@ export {}
 /**
  * @typedef {import('child_process').ForkOptions} child_process.ForkOptions
  */
+/**
+ * @typedef {import('stream').Writable} stream.Writable
+ */
 
 /* typal types/run.xml closure noSuppress */
 /**

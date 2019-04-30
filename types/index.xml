@@ -1,5 +1,6 @@
 <types namespace="_contextTesting">
   <import name="ForkOptions" from="child_process" link="https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options"/>
+  <import from="stream" name="Writable" desc="The writable stream to pipe the logs of the fork to, e.g., `process.stdout`."/>
 
   <type record name="ForkConfig" desc="Parameters for forking.">
     <prop string name="module">
