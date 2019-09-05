@@ -12,24 +12,22 @@
     "test-build": "ALAMODE_ENV=test-build yarn test",
     "lint": "eslint .",
     "doc": "NODE_DEBUG=doc doc -o README.md -n _contextTesting",
-    "depack": "GOOGLE_CLOSURE_COMPILER=/Volumes/backup/closure-compiler/target/closure-compiler-1.0-SNAPSHOT.jar depack example -c -a -p -o example/depack.js --externs externs.js -s",
+    "depack": "depack-dev example -c -a -p -o example/depack.js --externs externs.js -s",
     "b": "alamode src -o build -s",
     "build": "yarn-s d b doc",
     "e": "alanode",
     "example/": "yarn e example/example.js",
     "d": "yarn-s d1 externs types",
-    "d1": "typal src/index.js -c -t types/run.xml",
-    "externs": "typal externs.js -e",
-    "types": "typal types.js"
+    "d1": "typal src/index.js -u -t types/run.xml",
+    "externs": "typal types/externs.js -e",
+    "types": "typal types/index.js"
   },
   "files": [
     "build",
     "types",
-    "src",
-    "externs.js",
-    "types.js"
+    "src"
   ],
-  "externs": "externs.js",
+  "externs": "types/externs.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/contexttesting/fork.git"
@@ -48,12 +46,13 @@
   },
   "homepage": "https://github.com/contexttesting/fork#readme",
   "devDependencies": {
-    "alamode": "^2.0.0",
-    "documentary": "^1.26.5",
+    "alamode": "^3.0.0",
+    "documentary": "^1.32.2",
     "eslint-config-artdeco": "1.0.1",
-    "reloquent": "^1.3.0",
+    "reloquent": "^1.3.2",
+    "typal": "^1.22.2",
     "yarn-s": "1.1.0",
-    "zoroaster": "^3.13.0"
+    "zoroaster": "^4.1.2"
   },
   "dependencies": {
     "@zoroaster/deep-equal": "^1.0.1",

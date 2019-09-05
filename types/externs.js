@@ -30,16 +30,6 @@ _contextTesting.ForkConfig
  */
 _contextTesting.ForkConfig.prototype.module
 /**
- * The function to get arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.
- * @type {(function(this: *, !Array<string>, ..._contextTesting.Context): !(Array<string>|Promise<!Array<string>>))|undefined}
- */
-_contextTesting.ForkConfig.prototype.getArgs
-/**
- * The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.
- * @type {(function(this: *, ..._contextTesting.Context): !child_process.ForkOptions)|undefined}
- */
-_contextTesting.ForkConfig.prototype.getOptions
-/**
  * Options for the forked processed, such as `ENV` and `cwd`.
  * @type {(!child_process.ForkOptions)|undefined}
  */
@@ -55,7 +45,7 @@ _contextTesting.ForkConfig.prototype.inputs
  */
 _contextTesting.ForkConfig.prototype.stderrInputs
 /**
- * Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties.
+ * Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties. Default `false`.
  * @type {(boolean|{stderr: !(stream.Writable|NodeJS.WriteStream), stdout: !(stream.Writable|NodeJS.WriteStream)})|undefined}
  */
 _contextTesting.ForkConfig.prototype.log
@@ -74,6 +64,16 @@ _contextTesting.ForkConfig.prototype.stripAnsi
  * @type {((_contextTesting.Preprocessor|_contextTesting.ForkPreprocessor))|undefined}
  */
 _contextTesting.ForkConfig.prototype.preprocess
+/**
+ * The function to extend arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.
+ * @type {(function(this: !Object,!Array<string>,..._contextTesting.Context): !(Array<string>|Promise<!Array<string>>))|undefined}
+ */
+_contextTesting.ForkConfig.prototype.getArgs = function(args, ...args) {}
+/**
+ * The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.
+ * @type {(function(this: !Object,..._contextTesting.Context): !child_process.ForkOptions)|undefined}
+ */
+_contextTesting.ForkConfig.prototype.getOptions = function(...args) {}
 /**
  * The function which processes fork's outputs before returning them for asserts.
  * @typedef {function(string): string}

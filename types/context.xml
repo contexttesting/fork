@@ -1,10 +1,10 @@
 <types namespace="_contextTesting">
   <type name="Context" desc="A context made with a constructor.">
-    <prop opt name="_init" type="function(): !Promise|void">
+    <fn opt name="_init" return="!Promise|void">
       The function to initialise the context.
-    </prop>
-    <prop opt name="_destroy" type="function(): !Promise|void">
+    </fn>
+    <fn opt name="_destroy" return="!Promise|void">
       The function to destroy the context.
-    </prop>
+    </fn>
   </type>
 </types>

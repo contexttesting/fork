@@ -6,12 +6,17 @@
     <prop string name="module">
       The path to the module to fork.
     </prop>
-    <prop opt name="getArgs" type="function(this: *, !Array<string>, ..._contextTesting.Context): !(Array<string>|Promise<!Array<string>>)">
-      The function to get arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.
-    </prop>
-    <prop opt name="getOptions" type="function(this: *, ..._contextTesting.Context): !child_process.ForkOptions">
+    <fn opt name="getArgs" return="!(Array<string>|Promise<!Array<string>>)">
+      <arg name="this" type="!Object">The context of a mask.</arg>
+      <arg name="args" type="!Array<string>">Arguments parsed as array.</arg>
+      <arg name="...contexts" type="_contextTesting.Context">Zoroaster contexts.</arg>
+      The function to extend arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.
+    </fn>
+    <fn opt name="getOptions" return="!child_process.ForkOptions">
+      <arg name="this" type="!Object">The context of a mask.</arg>
+      <arg name="...contexts" type="_contextTesting.Context">Zoroaster contexts.</arg>
       The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.
-    </prop>
+    </fn>
     <prop opt name="options" type="!child_process.ForkOptions">
       Options for the forked processed, such as `ENV` and `cwd`.
     </prop>
