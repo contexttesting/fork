@@ -22,8 +22,8 @@ export {}
  * @prop {boolean} [includeAnswers=true] Whether to add the answers to the `stderr` and `stdout` output. Default `true`.
  * @prop {boolean} [stripAnsi=true] Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result. Default `true`.
  * @prop {(_contextTesting.Preprocessor|_contextTesting.ForkPreprocessor)} [preprocess] The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.
- * @prop {(this: !Object, args: !Array<string>, ...contexts: _contextTesting.Context[]) => !(Array<string>|Promise<!Array<string>>)} [getArgs] The function to extend arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.
- * @prop {(this: !Object, ...contexts: _contextTesting.Context[]) => !child_process.ForkOptions} [getOptions] The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.
+ * @prop {(this: Object, forkArgs: !Array<string>, ...contexts: _contextTesting.Context[]) => !(Array<string>|Promise<!Array<string>>)} [getArgs] The function to extend arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.
+ * @prop {(this: Object, ...contexts: _contextTesting.Context[]) => !child_process.ForkOptions} [getOptions] The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.
  * @typedef {_contextTesting.Preprocessor} Preprocessor The function which processes fork's outputs before returning them for asserts.
  * @typedef {function(string): string} _contextTesting.Preprocessor The function which processes fork's outputs before returning them for asserts.
  * @typedef {_contextTesting.ForkPreprocessor} ForkPreprocessor An object with `stdout` and `stderr` preprocessors.

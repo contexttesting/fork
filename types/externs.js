@@ -66,12 +66,12 @@ _contextTesting.ForkConfig.prototype.stripAnsi
 _contextTesting.ForkConfig.prototype.preprocess
 /**
  * The function to extend arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.
- * @type {(function(this: !Object,!Array<string>,..._contextTesting.Context): !(Array<string>|Promise<!Array<string>>))|undefined}
+ * @type {(function(this: Object,!Array<string>,..._contextTesting.Context): !(Array<string>|Promise<!Array<string>>))|undefined}
  */
-_contextTesting.ForkConfig.prototype.getArgs = function(args, ...args) {}
+_contextTesting.ForkConfig.prototype.getArgs = function(forkArgs, ...args) {}
 /**
  * The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.
- * @type {(function(this: !Object,..._contextTesting.Context): !child_process.ForkOptions)|undefined}
+ * @type {(function(this: Object,..._contextTesting.Context): !child_process.ForkOptions)|undefined}
  */
 _contextTesting.ForkConfig.prototype.getOptions = function(...args) {}
 /**

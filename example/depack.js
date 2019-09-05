@@ -232,7 +232,7 @@ function pa(a, b) {
 };
 function qa(a, b) {
   let f = 0;
-  const g = (e, c = void 0) => {
+  const g = (e, c) => {
     const h = " ".repeat(2 * f);
     c = void 0 !== c ? R("+ " + U(c), "green") : null;
     e = void 0 !== e ? R("- " + U(e), "red") : null;
