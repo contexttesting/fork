@@ -1,3 +1,9 @@
+## 5 September 2019
+
+### [1.3.3](https://github.com/contexttesting/fork/compare/v1.3.2...v1.3.3)
+
+- [doc] Compile types and externs with newer _Typal_ (change props to functions annotations).
+
 ## 1 May 2019
 
 ### [1.3.2](https://github.com/contexttesting/fork/compare/v1.3.1...v1.3.2)
