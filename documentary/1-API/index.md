@@ -10,7 +10,7 @@ import fork from '@zoroaster/fork'
 
 <typedef name="fork">types/api.xml</typedef>
 
-%TYPEDEF types/run.xml%
+<typedef>types/run.xml</typedef>
 
 _For example, to test the fork with the next code:_
 %EXAMPLE: example/fork%

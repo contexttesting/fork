@@ -1,6 +1,6 @@
 {
   "_contextTesting.fork": {
-    "link": "https://github.com/contexttesting/fork#forkforkconfig-stringforkconfiginput-stringprops-array_contexttestingcontext--forkresult",
+    "link": "https://github.com/contexttesting/fork#forkoptions-runfork-forkresult",
     "description": "This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.\nReturns the result of the work, updated to contain answers in the interactive mode."
   },
   "_contextTesting.RunFork": {

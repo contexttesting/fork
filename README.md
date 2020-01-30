@@ -12,7 +12,7 @@ yarn add @zoroaster/fork
 
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
-- [`fork(forkConfig: string|!ForkConfig, input: string, props=: *, !Array<!_contextTesting.Context>=: *): !ForkResult`](#forkforkconfig-stringforkconfiginput-stringprops-array_contexttestingcontext--forkresult)
+- [`fork(options: !RunFork): !ForkResult`](#forkoptions-runfork-forkresult)
   * [`RunFork`](#type-runfork)
   * [`ForkResult`](#type-forkresult)
 - [Types](#types)
@@ -38,16 +38,14 @@ import fork from '@zoroaster/fork'
   <img src="/.documentary/section-breaks/1.svg?sanitize=true">
 </a></p>
 
-## <code><ins>fork</ins>(</code><sub><br/>&nbsp;&nbsp;`forkConfig: string|!ForkConfig,`<br/>&nbsp;&nbsp;`input: string,`<br/>&nbsp;&nbsp;`props=: *,`<br/>&nbsp;&nbsp;`!Array<!_contextTesting.Context>=: *,`<br/></sub><code>): <i>!ForkResult</i></code>
+## <code><ins>fork</ins>(</code><sub><br/>&nbsp;&nbsp;`options: !RunFork,`<br/></sub><code>): <i>!ForkResult</i></code>
 This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
 Returns the result of the work, updated to contain answers in the interactive mode.
 
- - <kbd><strong>forkConfig*</strong></kbd> <em><code>(string \| <a href="#type-forkconfig" title="Parameters for forking.">!ForkConfig</a>)</code></em>: The path to the script to fork, or configuration object.
- - <kbd><strong>input*</strong></kbd> <em>`string`</em>: The input to the test from the mask's result. It will be converted into an array of strings to become CLI arguments to pass to the fork (i.e. `argv` array).
- - <kbd>props</kbd> <em>`*`</em> (optional): The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.
- - <kbd>!Array<!_contextTesting.Context></kbd> <em>`*`</em> (optional): The contexts for the test to be passed to `getArgs` and `getOptions`.
+ - <kbd><strong>options*</strong></kbd> <em><code><a href="#type-runfork" title="Options for the run method.">!RunFork</a></code></em>: Options for the run method.
 
 __<a name="type-runfork">`RunFork`</a>__: Options for the run method.
+
 
 |      Name       |                                                 Type                                                  |                                                             Description                                                              |
 | --------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
@@ -56,7 +54,9 @@ __<a name="type-runfork">`RunFork`</a>__: Options for the run method.
 | props           | <em>*</em>                                                                                            | The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result. |
 | contexts        | <em>!Array&lt;<a href="#type-context" title="A context made with a constructor.">Context</a>&gt;</em> | The contexts for the test to be passed to `getArgs` and `getOptions`.                                                                |
 
+
 __<a name="type-forkresult">`ForkResult`</a>__
+
 
 |    Name     |      Type       |                                 Description                                 |
 | ----------- | --------------- | --------------------------------------------------------------------------- |
