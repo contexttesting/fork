@@ -20,7 +20,7 @@ yarn add @zoroaster/fork
   * [`Preprocessor`](#type-preprocessor)
   * [`ForkPreprocessor`](#type-forkpreprocessor)
   * [`Context`](#type-context)
-- [Copyright](#copyright)
+- [Copyright & License](#copyright--license)
 
 <p align="center"><a href="#table-of-contents">
   <img src="/.documentary/section-breaks/0.svg?sanitize=true">
@@ -165,7 +165,9 @@ __<a name="type-context">`Context`</a>__: A context made with a constructor.
   <img src="/.documentary/section-breaks/3.svg?sanitize=true">
 </a></p>
 
-## Copyright
+## Copyright & License
+
+GNU Affero General Public License v3.0
 
 
   (c) [Context Testing](https://contexttesting.com) 2020
