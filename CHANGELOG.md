@@ -1,3 +1,10 @@
+## 30 January 2020
+
+### [1.4.0](https://github.com/contexttesting/fork/compare/v1.3.3...v1.4.0)
+
+- [doc] Add `typedefs.json` file.
+- [doc] Update types documentation.
+
 ## 5 September 2019
 
 ### [1.3.3](https://github.com/contexttesting/fork/compare/v1.3.2...v1.3.3)
