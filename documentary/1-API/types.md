@@ -2,8 +2,8 @@
 
 The following types are used in this software.
 
-%TYPEDEF types/index.xml%
+<typedef>types/index.xml</typedef>
 
-%TYPEDEF types/context.xml%
+<typedef>types/context.xml</typedef>
 
 %~%

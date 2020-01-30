@@ -1,5 +1,5 @@
 <types ns="_contextTesting">
-  <method name="fork" return="!_contextTesting.ForkResult">
+  <method async name="fork" return="!_contextTesting.ForkResult">
     <arg type="!_contextTesting.RunFork" name="options">
       Options for the run method.
     </arg>
