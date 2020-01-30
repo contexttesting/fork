@@ -1,5 +1,5 @@
-let deepEqual = require('@zoroaster/deep-equal'); if (deepEqual && deepEqual.__esModule) deepEqual = deepEqual.default;
-let erte = require('erte'); if (erte && erte.__esModule) erte = erte.default;
+const deepEqual = require('@zoroaster/deep-equal');
+const erte = require('erte');
 const { strictEqual } = require('assert');
 
 const assertExpected = (result, expected) => {

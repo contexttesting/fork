@@ -1,4 +1,4 @@
-let mismatch = require('mismatch'); if (mismatch && mismatch.__esModule) mismatch = mismatch.default;
+const mismatch = require('mismatch');
 
 /**
  * Return shell arguments from a string.
