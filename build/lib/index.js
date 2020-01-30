@@ -2,7 +2,7 @@ let deepEqual = require('@zoroaster/deep-equal'); if (deepEqual && deepEqual.__e
 let erte = require('erte'); if (erte && erte.__esModule) erte = erte.default;
 const { strictEqual } = require('assert');
 
-       const assertExpected = (result, expected) => {
+const assertExpected = (result, expected) => {
   try {
     strictEqual(result, expected)
   } catch (err) {
@@ -18,7 +18,7 @@ const { strictEqual } = require('assert');
  * @param {!Array<_contextTesting.Context>} contexts The array of contexts.
  * @param {*} props The props found in the mask.
  */
-       const getForkArguments = async (forkConfig, args = [], contexts = [], props = {}) => {
+const getForkArguments = async (forkConfig, args = [], contexts = [], props = {}) => {
   const stdioOpts = /** @type {!child_process.ForkOptions} */ ({
     stdio: 'pipe',
     execArgv: [],
@@ -57,7 +57,7 @@ const { strictEqual } = require('assert');
   }
 }
 
-       const assertForkOutput = (actual, expected, prop) => {
+const assertForkOutput = (actual, expected, prop) => {
   try {
     if (typeof expected == 'string') {
       assertExpected(actual, expected)

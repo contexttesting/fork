@@ -1,6 +1,6 @@
 # @zoroaster/fork
 
-[![npm version](https://badge.fury.io/js/%40zoroaster%2Ffork.svg)](https://npmjs.org/package/@zoroaster/fork)
+[![npm version](https://badge.fury.io/js/%40zoroaster%2Ffork.svg)](https://www.npmjs.com/package/@zoroaster/fork)
 
 `@zoroaster/fork` is used in _Zoroaster_ to test forks. It is part of the [`@zoroaster/mask`](https://github.com/contexttesting/mask) package which uses it to compare forks' output against the results written in non-js files. Nevertheless, the package can be used on its own to spawn and test forks &mdash; the library allows to fork a process and then asserts on the `stderr`, `stdout` and `code` properties, if they are passed, and returns the actual values if the assertions passed.
 
@@ -12,7 +12,7 @@ yarn add @zoroaster/fork
 
 - [Table Of Contents](#table-of-contents)
 - [API](#api)
-- [`async fork(forkConfig: string|!ForkConfig, input: string, props?: *, contexts?: !Array<!Context>): ForkResult`](#async-forkforkconfig-stringforkconfiginput-stringprops-contexts-arraycontext-forkresult)
+- [`fork(forkConfig: string|!ForkConfig, input: string, props=: *, !Array<!_contextTesting.Context>=: *): !ForkResult`](#forkforkconfig-stringforkconfiginput-stringprops-array_contexttestingcontext--forkresult)
   * [`RunFork`](#type-runfork)
   * [`ForkResult`](#type-forkresult)
 - [Types](#types)
@@ -22,7 +22,9 @@ yarn add @zoroaster/fork
   * [`Context`](#type-context)
 - [Copyright](#copyright)
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/0.svg?sanitize=true">
+</a></p>
 
 ## API
 
@@ -32,11 +34,18 @@ The package is available by importing its default function:
 import fork from '@zoroaster/fork'
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/1.svg?sanitize=true">
+</a></p>
 
-## `async fork(`<br/>&nbsp;&nbsp;`forkConfig: string|!ForkConfig,`<br/>&nbsp;&nbsp;`input: string,`<br/>&nbsp;&nbsp;`props?: *,`<br/>&nbsp;&nbsp;`contexts?: !Array<!Context>,`<br/>`): ForkResult`
-
+## <code><ins>fork</ins>(</code><sub><br/>&nbsp;&nbsp;`forkConfig: string|!ForkConfig,`<br/>&nbsp;&nbsp;`input: string,`<br/>&nbsp;&nbsp;`props=: *,`<br/>&nbsp;&nbsp;`!Array<!_contextTesting.Context>=: *,`<br/></sub><code>): <i>!ForkResult</i></code>
 This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
+Returns the result of the work, updated to contain answers in the interactive mode.
+
+ - <kbd><strong>forkConfig*</strong></kbd> <em><code>(string \| <a href="#type-forkconfig" title="Parameters for forking.">!ForkConfig</a>)</code></em>: The path to the script to fork, or configuration object.
+ - <kbd><strong>input*</strong></kbd> <em>`string`</em>: The input to the test from the mask's result. It will be converted into an array of strings to become CLI arguments to pass to the fork (i.e. `argv` array).
+ - <kbd>props</kbd> <em>`*`</em> (optional): The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.
+ - <kbd>!Array<!_contextTesting.Context></kbd> <em>`*`</em> (optional): The contexts for the test to be passed to `getArgs` and `getOptions`.
 
 __<a name="type-runfork">`RunFork`</a>__: Options for the run method.
 
@@ -66,6 +75,7 @@ process.exit(5)
 _The ContextTesting/Fork can be used:_
 ```js
 /* yarn example/ */
+import '../types/externs'
 import fork from '@zoroaster/fork'
 
 (async () => {
@@ -103,58 +113,62 @@ import fork from '@zoroaster/fork'
 })()
 ```
 ```js
-{ code: 5,
-  stdout: '[ \'hello\', \'world\', \'999\' ]\n',
-  stderr: 'CONTEXT - hello world\n' }
+
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/2.svg?sanitize=true">
+</a></p>
 
 ## Types
 
 The following types are used in this software.
 
-[`import('child_process').ForkOptions`](https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options) __<a name="type-child_processforkoptions">`child_process.ForkOptions`</a>__: Options to fork a child process, allows to set cwd, environment variables, etc.
+[`import('child_process').ForkOptions`](https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options) <strong><a name="type-child_processforkoptions">`child_process.ForkOptions`</a></strong>: Options to fork a child process with. Allows to set cwd, environment variables, etc.
 
-`import('stream').Writable` __<a name="type-streamwritable">`stream.Writable`</a>__: The writable stream to pipe the logs of the fork to, e.g., `process.stdout`.
+[`import('stream').Writable`](https://nodejs.org/api/stream.html#stream_class_stream_writable) __<a name="type-streamwritable">`stream.Writable`</a>__: A stream that can be written data to.
 
 __<a name="type-forkconfig">`ForkConfig`</a>__: Parameters for forking.
 
-|      Name      |                                                                                                                                                                                     Type                                                                                                                                                                                     |                                                                                                   Description                                                                                                    | Default |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| __module*__    | <em>string</em>                                                                                                                                                                                                                                                                                                                                                              | The path to the module to fork.                                                                                                                                                                                  | -       |
-| getArgs        | <em>function(this: *, !Array&lt;string&gt;, ...<a href="#type-context" title="A context made with a constructor.">Context</a>): !(Array&lt;string&gt; \| Promise&lt;!Array&lt;string&gt;&gt;)</em>                                                                                                                                                                           | The function to get arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.                                                                  | -       |
-| getOptions     | <em>function(this: *, ...<a href="#type-context" title="A context made with a constructor.">Context</a>): <a href="#type-child_processforkoptions" title="Options to fork a child process, allows to set cwd, environment variables, etc.">!child_process.ForkOptions</a></em>                                                                                               | The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.                                                                        | -       |
-| options        | <em><a href="#type-child_processforkoptions" title="Options to fork a child process, allows to set cwd, environment variables, etc.">!child_process.ForkOptions</a></em>                                                                                                                                                                                                     | Options for the forked processed, such as `ENV` and `cwd`.                                                                                                                                                       | -       |
-| inputs         | <em>Array&lt;[RegExp, string]&gt;</em>                                                                                                                                                                                                                                                                                                                                       | Inputs to push to `stdin` when `stdout` writes data. The inputs are kept on stack, and taken off the stack when the RegExp matches the written data, e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`. | -       |
-| stderrInputs   | <em>Array&lt;[RegExp, string]&gt;</em>                                                                                                                                                                                                                                                                                                                                       | Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`), e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`.                                                                           | -       |
-| log            | <em>(boolean \| { stderr: !(<a href="#type-streamwritable" title="The writable stream to pipe the logs of the fork to, e.g., `process.stdout`.">stream.Writable</a> \| NodeJS.WriteStream), stdout: !(<a href="#type-streamwritable" title="The writable stream to pipe the logs of the fork to, e.g., `process.stdout`.">stream.Writable</a> \| NodeJS.WriteStream) })</em> | Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties.                            | `false` |
-| includeAnswers | <em>boolean</em>                                                                                                                                                                                                                                                                                                                                                             | Whether to add the answers to the `stderr` and `stdout` output.                                                                                                                                                  | `true`  |
-| stripAnsi      | <em>boolean</em>                                                                                                                                                                                                                                                                                                                                                             | Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result.                                                                                                                     | `true`  |
-| preprocess     | <em>(<a href="#type-preprocessor" title="The function which processes fork's outputs before returning them for asserts.">Preprocessor</a> \| <a href="#type-forkpreprocessor" title="An object with `stdout` and `stderr` preprocessors.">ForkPreprocessor</a>)</em>                                                                                                         | The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.                                              | -       |
+|      Name      |                                                                                                                                              Type                                                                                                                                              |                                                                                                   Description                                                                                                    | Default |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| __module*__    | <em>string</em>                                                                                                                                                                                                                                                                                | The path to the module to fork.                                                                                                                                                                                  | -       |
+| options        | <em><a href="#type-child_processforkoptions" title="Options to fork a child process with. Allows to set cwd, environment variables, etc.">!child_process.ForkOptions</a></em>                                                                                                                  | Options for the forked processed, such as `ENV` and `cwd`.                                                                                                                                                       | -       |
+| inputs         | <em>!Array&lt;!Array&lt;(!RegExp \| string)&gt;&gt;</em>                                                                                                                                                                                                                                       | Inputs to push to `stdin` when `stdout` writes data. The inputs are kept on stack, and taken off the stack when the RegExp matches the written data, e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`. | -       |
+| stderrInputs   | <em>!Array&lt;!Array&lt;(!RegExp \| string)&gt;&gt;</em>                                                                                                                                                                                                                                       | Inputs to push to `stdin` when `stderr` writes data (similar to `inputs`), e.g., `[[/question/, 'answer'], [/question2/, 'answer2']]`.                                                                           | -       |
+| log            | <em>(boolean \| { stderr: !(<a href="#type-streamwritable" title="A stream that can be written data to.">stream.Writable</a> \| NodeJS.WriteStream), stdout: !(<a href="#type-streamwritable" title="A stream that can be written data to.">stream.Writable</a> \| NodeJS.WriteStream) })</em> | Whether to pipe data from `stdout`, `stderr` to the process's streams. If an object is passed, the output will be piped to streams specified as its `stdout` and `stderr` properties.                            | `false` |
+| includeAnswers | <em>boolean</em>                                                                                                                                                                                                                                                                               | Whether to add the answers to the `stderr` and `stdout` output.                                                                                                                                                  | `true`  |
+| stripAnsi      | <em>boolean</em>                                                                                                                                                                                                                                                                               | Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result.                                                                                                                     | `true`  |
+| preprocess     | <em>(<a href="#type-preprocessor" title="The function which processes fork's outputs before returning them for asserts.">Preprocessor</a> \| <a href="#type-forkpreprocessor" title="An object with `stdout` and `stderr` preprocessors.">ForkPreprocessor</a>)</em>                           | The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.                                              | -       |
+| getArgs        | <em>(this: Object, forkArgs: !Array&lt;string&gt;, ...contexts: <a href="#type-context" title="A context made with a constructor.">Context</a>[]) => !(Array&lt;string&gt; \| Promise&lt;!Array&lt;string&gt;&gt;)</em>                                                                        | The function to extend arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.                                                               | -       |
+| getOptions     | <em>(this: Object, ...contexts: <a href="#type-context" title="A context made with a constructor.">Context</a>[]) => <a href="#type-child_processforkoptions" title="Options to fork a child process with. Allows to set cwd, environment variables, etc.">!child_process.ForkOptions</a></em> | The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.                                                                        | -       |
 
 `function(string): string` __<a name="type-preprocessor">`Preprocessor`</a>__: The function which processes fork's outputs before returning them for asserts.
 
 __<a name="type-forkpreprocessor">`ForkPreprocessor`</a>__: An object with `stdout` and `stderr` preprocessors.
 
-|  Name  |                                                                     Type                                                                      |               Description               |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| stdout | <em><a href="#type-preprocessor" title="The function which processes fork's outputs before returning them for asserts.">Preprocessor</a></em> | How to process `stdout` before asserts. |
-| stderr | <em><a href="#type-preprocessor" title="The function which processes fork's outputs before returning them for asserts.">Preprocessor</a></em> | How to process `stderr` before asserts. |
+|  Name  |              Type              |                                              Description                                               |
+| ------ | ------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| stdout | <em>(stdout: string) => ?</em> | How to process `stdout` before asserts.                                                                |
+| stderr | <em>(stdout: string) => ?</em> | How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package. |
 
 __<a name="type-context">`Context`</a>__: A context made with a constructor.
 
-|   Name   |                  Type                   |               Description               |
-| -------- | --------------------------------------- | --------------------------------------- |
-| _init    | <em>function(): (!Promise \| void)</em> | The function to initialise the context. |
-| _destroy | <em>function(): (!Promise \| void)</em> | The function to destroy the context.    |
+|   Name   |               Type                |               Description               |
+| -------- | --------------------------------- | --------------------------------------- |
+| _init    | <em>() => (!Promise \| void)</em> | The function to initialise the context. |
+| _destroy | <em>() => (!Promise \| void)</em> | The function to destroy the context.    |
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/3.svg?sanitize=true">
+</a></p>
 
 ## Copyright
 
 
-  (c) [Context Testing](https://contexttesting.com) 2019
+  (c) [Context Testing](https://contexttesting.com) 2020
 
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/-1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/-1.svg?sanitize=true">
+</a></p>

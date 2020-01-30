@@ -1,0 +1,9 @@
+<types ns="_contextTesting">
+  <method name="fork" return="!_contextTesting.ForkResult">
+    <arg type="!_contextTesting.RunFork" name="options">
+      Options for the run method.
+    </arg>
+    This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
+    Returns the result of the work, updated to contain answers in the interactive mode.
+  </method>
+</types>

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview
+ * @externs
+ */
+
 /* typal types/run.xml */
 /** @const */
 var _contextTesting = {}
@@ -68,12 +73,12 @@ _contextTesting.ForkConfig.prototype.preprocess
  * The function to extend arguments to pass the fork based on the parsed mask input and contexts. The `this` context is set to the passed properties.
  * @type {(function(this: Object,!Array<string>,..._contextTesting.Context): !(Array<string>|Promise<!Array<string>>))|undefined}
  */
-_contextTesting.ForkConfig.prototype.getArgs = function(forkArgs, ...args) {}
+_contextTesting.ForkConfig.prototype.getArgs = function(forkArgs, ...contexts) {}
 /**
  * The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.
  * @type {(function(this: Object,..._contextTesting.Context): !child_process.ForkOptions)|undefined}
  */
-_contextTesting.ForkConfig.prototype.getOptions = function(...args) {}
+_contextTesting.ForkConfig.prototype.getOptions = function(...contexts) {}
 /**
  * The function which processes fork's outputs before returning them for asserts.
  * @typedef {function(string): string}
@@ -81,6 +86,24 @@ _contextTesting.ForkConfig.prototype.getOptions = function(...args) {}
 _contextTesting.Preprocessor
 /**
  * An object with `stdout` and `stderr` preprocessors.
- * @typedef {{ stdout: (_contextTesting.Preprocessor|undefined), stderr: (_contextTesting.Preprocessor|undefined) }}
+ * @record
  */
 _contextTesting.ForkPreprocessor
+/**
+ * How to process `stdout` before asserts.
+ * @type {(function(string))|undefined}
+ */
+_contextTesting.ForkPreprocessor.prototype.stdout = function(stdout) {}
+/**
+ * How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package.
+ * @type {(function(string))|undefined}
+ */
+_contextTesting.ForkPreprocessor.prototype.stderr = function(stdout) {}
+
+/* typal types/api.xml */
+/**
+ * This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
+Returns the result of the work, updated to contain answers in the interactive mode.
+ * @typedef {function(!_contextTesting.RunFork): !_contextTesting.ForkResult}
+ */
+_contextTesting.fork

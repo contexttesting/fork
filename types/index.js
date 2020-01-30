@@ -26,10 +26,10 @@ export {}
  * @prop {(this: Object, ...contexts: _contextTesting.Context[]) => !child_process.ForkOptions} [getOptions] The function to get options for the fork, such as `ENV` and `cwd`, based on contexts. The `this` context is set to the passed properties.
  * @typedef {_contextTesting.Preprocessor} Preprocessor The function which processes fork's outputs before returning them for asserts.
  * @typedef {function(string): string} _contextTesting.Preprocessor The function which processes fork's outputs before returning them for asserts.
- * @typedef {_contextTesting.ForkPreprocessor} ForkPreprocessor An object with `stdout` and `stderr` preprocessors.
- * @typedef {Object} _contextTesting.ForkPreprocessor An object with `stdout` and `stderr` preprocessors.
- * @prop {_contextTesting.Preprocessor} [stdout] How to process `stdout` before asserts.
- * @prop {_contextTesting.Preprocessor} [stderr] How to process `stderr` before asserts.
+ * @typedef {_contextTesting.ForkPreprocessor} ForkPreprocessor `＠record` An object with `stdout` and `stderr` preprocessors.
+ * @typedef {Object} _contextTesting.ForkPreprocessor `＠record` An object with `stdout` and `stderr` preprocessors.
+ * @prop {(stdout: string) => ?} [stdout] How to process `stdout` before asserts.
+ * @prop {(stdout: string) => ?} [stderr] How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package.
  */
 
 /* typal types/run.xml namespace */
@@ -45,4 +45,12 @@ export {}
  * @prop {string} stdout The output from the `stdout` stream, possibly with answers fed to `stdin`.
  * @prop {string} stderr The output from the `stderr` stream,  possibly with answers fed to `stdin`.
  * @prop {number} code The code with which the process exited.
+ */
+
+/* typal types/api.xml namespace */
+/**
+ * @typedef {_contextTesting.fork} fork This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
+Returns the result of the work, updated to contain answers in the interactive mode.
+ * @typedef {(options: !_contextTesting.RunFork) => !_contextTesting.ForkResult} _contextTesting.fork This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
+Returns the result of the work, updated to contain answers in the interactive mode.
  */

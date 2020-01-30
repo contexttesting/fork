@@ -6,13 +6,7 @@ import { getForkArguments, assertForkOutput } from './lib'
 import getArgs from './lib/get-args'
 
 /**
- * Run a fork.
- * @param {_contextTesting.RunFork} config Options for the run method.
- * @param {(string|!_contextTesting.ForkConfig)} config.forkConfig Either the config, or the path to the module to fork.
- * @param {string} config.input The input to the test from the mask's result. It will be converted into an array of strings to become arguments to pass to the fork.
- * @param {*} [config.props] The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.
- * @param {!Array<_contextTesting.Context>} [config.contexts] The contexts for the test to be passed to `getArgs` and `getOptions`.
- * @returns {!Promise<_contextTesting.ForkResult>} The result of the work, updated to contain answers in the interactive mode.
+ * @type {_contextTesting.fork}
  */
 const run = async (config) => {
   const {
@@ -110,17 +104,13 @@ export default run
 
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {import('../types').RunFork} _contextTesting.RunFork
+ * @typedef {import('../types').fork} _contextTesting.fork
  */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {import('../types').ForkConfig} _contextTesting.ForkConfig
+ * @typedef {import('stream').Readable} stream.Readable
  */
 /**
  * @suppress {nonStandardJsDocs}
- * @typedef {import('../types').Context} _contextTesting.Context
- */
-/**
- * @suppress {nonStandardJsDocs}
- * @typedef {import('../types').ForkResult} _contextTesting.ForkResult
+ * @typedef {import('stream').Writable} stream.Writable
  */

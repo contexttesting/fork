@@ -1,6 +1,6 @@
 <types namespace="_contextTesting">
-  <import name="ForkOptions" from="child_process" link="https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options" desc="Options to fork a child process, allows to set cwd, environment variables, etc."/>
-  <import from="stream" name="Writable" desc="The writable stream to pipe the logs of the fork to, e.g., `process.stdout`."/>
+  <import name="ForkOptions" from="child_process" />
+  <import from="stream" name="Writable" />
 
   <type record name="ForkConfig" desc="Parameters for forking.">
     <prop string name="module">
@@ -41,12 +41,14 @@
   </type>
   <type type="function(string): string" name="Preprocessor" desc="The function which processes fork's outputs before returning them for asserts.">
   </type>
-  <type name="ForkPreprocessor" desc="An object with `stdout` and `stderr` preprocessors.">
-    <prop opt type="_contextTesting.Preprocessor" name="stdout">
+  <record name="ForkPreprocessor" desc="An object with `stdout` and `stderr` preprocessors.">
+    <fn opt name="stdout">
+      <arg string name="stdout">The stdout of the fork.</arg>
       How to process `stdout` before asserts.
-    </prop>
-    <prop opt type="_contextTesting.Preprocessor" name="stderr">
-      How to process `stderr` before asserts.
-    </prop>
-  </type>
+    </fn>
+    <fn opt name="stderr">
+      <arg string name="stdout">The stderr of the fork.</arg>
+      How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package.
+    </fn>
+  </record>
 </types>

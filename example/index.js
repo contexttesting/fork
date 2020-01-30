@@ -1,4 +1,5 @@
 /* yarn example/ */
+import '../types/externs'
 import fork from '../src'
 
 (async () => {

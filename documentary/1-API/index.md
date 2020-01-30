@@ -8,16 +8,7 @@ import fork from '@zoroaster/fork'
 
 %~%
 
-```## async fork => ForkResult
-[
-  ["forkConfig", "string|!ForkConfig"],
-  ["input", "string"],
-  ["props?", "*"],
-  ["contexts?", "!Array<!Context>"]
-]
-```
-
-This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
+<typedef name="fork">types/api.xml</typedef>
 
 %TYPEDEF types/run.xml%
 
