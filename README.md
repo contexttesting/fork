@@ -169,9 +169,23 @@ __<a name="type-context">`Context`</a>__: A context made with a constructor.
 
 GNU Affero General Public License v3.0
 
-
-  (c) [Context Testing](https://contexttesting.com) 2020
-
+<table>
+  <tr>
+    <th>
+      <a href="https://www.artd.eco">
+        <img width="100" src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png"
+          alt="Art Deco">
+      </a>
+    </th>
+    <th>© <a href="https://www.artd.eco">Art Deco™</a> for <a href="https://www.contexttesting.com">ContextTesting</a> 2020</th>
+    <th>
+      <a href="https://www.contexttesting.com">
+        <img src="https://avatars1.githubusercontent.com/u/44418436?s=100&amp;v=4" width="100"
+          alt="ContextTesting">
+      </a>
+    </th>
+  </tr>
+</table>
 
 <p align="center"><a href="#table-of-contents">
   <img src="/.documentary/section-breaks/-1.svg?sanitize=true">
