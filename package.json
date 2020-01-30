@@ -12,7 +12,7 @@
     "test-build": "ALAMODE_ENV=test-build yarn test",
     "lint": "eslint .",
     "doc": "doc -o README.md -n _contextTesting -d -a",
-    "compile": "depack example -c -a -p -o example/depack.js -s",
+    "compile": "depack example -c -a -p -o example/depack.js -s --externs types/externs.js",
     "b": "alamode src -o build -s",
     "build": "yarn-s d b doc",
     "e": "alanode",
