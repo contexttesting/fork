@@ -28,8 +28,8 @@ export {}
  * @typedef {function(string): string} _contextTesting.Preprocessor The function which processes fork's outputs before returning them for asserts.
  * @typedef {_contextTesting.ForkPreprocessor} ForkPreprocessor `＠record` An object with `stdout` and `stderr` preprocessors.
  * @typedef {Object} _contextTesting.ForkPreprocessor `＠record` An object with `stdout` and `stderr` preprocessors.
- * @prop {(stdout: string) => ?} [stdout] How to process `stdout` before asserts.
- * @prop {(stdout: string) => ?} [stderr] How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package.
+ * @prop {(stdout: string) => string} [stdout] How to process `stdout` before asserts.
+ * @prop {(stdout: string) => string} [stderr] How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package.
  */
 
 /* typal types/run.xml namespace */
@@ -40,8 +40,8 @@ export {}
  * @prop {string} input The input to the test from the mask's result. It will be converted into an array of strings to become arguments to pass to the fork.
  * @prop {*} [props] The properties to pass to the `getArgs` and `getOptions` as their this context. These properties will be got from the mask's result.
  * @prop {!Array<_contextTesting.Context>} [contexts] The contexts for the test to be passed to `getArgs` and `getOptions`.
- * @typedef {_contextTesting.ForkResult} ForkResult
- * @typedef {Object} _contextTesting.ForkResult
+ * @typedef {_contextTesting.ForkResult} ForkResult The output of the fork method.
+ * @typedef {Object} _contextTesting.ForkResult The output of the fork method.
  * @prop {string} stdout The output from the `stdout` stream, possibly with answers fed to `stdin`.
  * @prop {string} stderr The output from the `stderr` stream,  possibly with answers fed to `stdin`.
  * @prop {number} code The code with which the process exited.

@@ -12,6 +12,7 @@ var _contextTesting = {}
  */
 _contextTesting.RunFork
 /**
+ * The output of the fork method.
  * @typedef {{ stdout: string, stderr: string, code: number }}
  */
 _contextTesting.ForkResult
@@ -91,12 +92,12 @@ _contextTesting.Preprocessor
 _contextTesting.ForkPreprocessor
 /**
  * How to process `stdout` before asserts.
- * @type {(function(string))|undefined}
+ * @type {(function(string): string)|undefined}
  */
 _contextTesting.ForkPreprocessor.prototype.stdout = function(stdout) {}
 /**
  * How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package.
- * @type {(function(string))|undefined}
+ * @type {(function(string): string)|undefined}
  */
 _contextTesting.ForkPreprocessor.prototype.stderr = function(stdout) {}
 
@@ -104,6 +105,6 @@ _contextTesting.ForkPreprocessor.prototype.stderr = function(stdout) {}
 /**
  * This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
 Returns the result of the work, updated to contain answers in the interactive mode.
- * @typedef {function(!_contextTesting.RunFork): !_contextTesting.ForkResult}
+ * @typedef {function(!_contextTesting.RunFork): !Promise<!_contextTesting.ForkResult>}
  */
 _contextTesting.fork
