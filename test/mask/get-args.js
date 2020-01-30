@@ -2,8 +2,8 @@ import makeTestSuite from '@zoroaster/mask'
 import getArgs from '../../src/lib/get-args'
 
 const ts = makeTestSuite('test/result/get-args', {
-  getResults(input) {
-    const matches = getArgs(input)
+  getResults() {
+    const matches = getArgs(this.input)
     return matches
   },
   jsonProps: ['expected'],

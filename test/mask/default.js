@@ -2,11 +2,11 @@ import makeTestSuite from '@zoroaster/mask'
 import fork from '../../src'
 
 export default makeTestSuite('test/result/default', {
-  async getResults(input) {
+  async getResults() {
     const stripAnsi = this.stripAnsi
     const res = await fork({
       forkConfig: {
-        module: input,
+        module: this.input,
         stripAnsi: stripAnsi,
         preprocess(string) {
           return escape(string)
@@ -23,10 +23,10 @@ export default makeTestSuite('test/result/default', {
 })
 
 export const preprocess = makeTestSuite('test/result/pre', {
-  async getResults(input) {
+  async getResults() {
     const res = await fork({
       forkConfig: {
-        module: input,
+        module: this.input,
         preprocess: {
           stdout(a) { return 'pre-stdout ' + a },
           stderr(a) { return 'pre-stderr ' + a },

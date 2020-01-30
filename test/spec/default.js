@@ -1,4 +1,4 @@
-import { deepEqual, equal, throws } from 'zoroaster/assert'
+import { deepEqual, equal, throws } from '@zoroaster/assert'
 import Context from '../context'
 import fork from '../../src'
 import Log from '../context/Log'
