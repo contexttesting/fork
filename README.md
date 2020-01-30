@@ -148,10 +148,10 @@ __<a name="type-forkconfig">`ForkConfig`</a>__: Parameters for forking.
 __<a name="type-forkpreprocessor">`ForkPreprocessor`</a>__: An object with `stdout` and `stderr` preprocessors.
 
 
-|  Name  |              Type              |                                              Description                                               |
-| ------ | ------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| stdout | <em>(stdout: string) => ?</em> | How to process `stdout` before asserts.                                                                |
-| stderr | <em>(stdout: string) => ?</em> | How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package. |
+|  Name  |                Type                 |                                              Description                                               |
+| ------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| stdout | <em>(stdout: string) => string</em> | How to process `stdout` before asserts.                                                                |
+| stderr | <em>(stdout: string) => string</em> | How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package. |
 
 __<a name="type-context">`Context`</a>__: A context made with a constructor.
 

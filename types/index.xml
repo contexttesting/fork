@@ -42,11 +42,11 @@
   <type type="function(string): string" name="Preprocessor" desc="The function which processes fork's outputs before returning them for asserts.">
   </type>
   <record name="ForkPreprocessor" desc="An object with `stdout` and `stderr` preprocessors.">
-    <fn opt name="stdout">
+    <fn opt name="stdout" return="string">
       <arg string name="stdout">The stdout of the fork.</arg>
       How to process `stdout` before asserts.
     </fn>
-    <fn opt name="stderr">
+    <fn opt name="stderr" return="string">
       <arg string name="stdout">The stderr of the fork.</arg>
       How to process `stderr` before asserts, for example, you can strip `\r` symbols with `clearr` package.
     </fn>
