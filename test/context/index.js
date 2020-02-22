@@ -1,5 +1,6 @@
 import { resolve, join } from 'path'
 import { debuglog } from 'util'
+import { EOL } from 'os'
 
 const LOG = debuglog('@zoroaster/fork')
 

@@ -35,6 +35,9 @@
     <prop boolean name="stripAnsi" default="true">
       Remove ANSI escape sequences from the `stdout` and `stderr` prior to checking of the result.
     </prop>
+    <prop boolean name="normaliseOutputs" default="false">
+      On Windows, updates all `\n` to `\r\n`, as `console.log` only prints `\n`.
+    </prop>
     <prop type="(_contextTesting.Preprocessor|_contextTesting.ForkPreprocessor)" opt name="preprocess">
       The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.
     </prop>
