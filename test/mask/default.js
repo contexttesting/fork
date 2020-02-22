@@ -3,14 +3,16 @@ import fork from '../../src'
 
 export default makeTestSuite('test/result/default', {
   async getResults() {
-    const stripAnsi = this.stripAnsi
+    const { stripAnsi } = this
     const res = await fork({
       forkConfig: {
         module: this.input,
-        stripAnsi: stripAnsi,
-        preprocess(string) {
-          return escape(string)
+        stripAnsi,
+        preprocess: (string) => {
+          if (stripAnsi === false) return escape(string)
+          return string
         },
+        normaliseOutputs: this.normalise,
       },
       props: {
         stdout: this.stdout,
@@ -19,7 +21,7 @@ export default makeTestSuite('test/result/default', {
     })
     return res
   },
-  jsonProps: ['stripAnsi'],
+  jsProps: ['normalise', 'stripAnsi'],
 })
 
 export const preprocess = makeTestSuite('test/result/pre', {

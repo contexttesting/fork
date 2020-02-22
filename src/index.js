@@ -2,6 +2,7 @@ import { fork } from 'spawncommand'
 import forkFeed from 'forkfeed'
 import Catchment from 'catchment'
 import { PassThrough } from 'stream'
+import { EOL } from 'os'
 import { getForkArguments, assertForkOutput } from './lib'
 import getArgs from './lib/get-args'
 
@@ -24,7 +25,10 @@ const run = async (config) => {
   })
   const { promise, stdout, stdin, stderr } = fork(mod, args, options)
 
-  const { includeAnswers = true, log, inputs, stderrInputs, stripAnsi = true, preprocess } = forkConfig
+  const { includeAnswers = true, log, inputs, stderrInputs, stripAnsi = true, 
+    preprocess, 
+    normaliseOutputs = false, // will be true next version
+  } = forkConfig
 
   const stdoutLog = new PassThrough()
   const stderrLog = new PassThrough()
@@ -73,11 +77,11 @@ const run = async (config) => {
     })
   }
 
-  assertFork(res, props, stripAnsi, preprocess)
+  assertFork(res, props, stripAnsi, preprocess, normaliseOutputs)
   return res
 }
 
-const assertFork = ({ code, stdout, stderr }, props, stripAnsi, preprocess) => {
+const assertFork = ({ code, stdout, stderr }, props, stripAnsi, preprocess, normaliseOutputs) => {
   let stdoutPre, stderrPre
   if (typeof preprocess == 'object') {
     ({ stdout: stdoutPre, stderr: stderrPre } = preprocess)
@@ -88,8 +92,10 @@ const assertFork = ({ code, stdout, stderr }, props, stripAnsi, preprocess) => {
   stderr = stderr.replace(/\r?\n$/, '')
   const o = stripAnsi ? stdout.replace(/\033\[.*?m/g, '') : stdout
   const e = stripAnsi ? stderr.replace(/\033\[.*?m/g, '') : stderr
-  const op = stdoutPre ? stdoutPre(o) : o
-  const ep = stderrPre ? stderrPre(e) : e
+  const no = normaliseOutputs ? normaliseWin(o) : o
+  const ne = normaliseOutputs ? normaliseWin(e) : e
+  const op = stdoutPre ? stdoutPre(no) : no
+  const ep = stderrPre ? stderrPre(ne) : ne
   assertForkOutput(op, props.stdout, 'stdout')
   assertForkOutput(ep, props.stderr, 'stderr')
   if (props.code && code != props.code) {
@@ -98,6 +104,17 @@ const assertFork = ({ code, stdout, stderr }, props, stripAnsi, preprocess) => {
     err.property = 'code'
     throw err
   }
+  return { stdout: op, stderr: ep }
+}
+
+/**
+ * Normalises output for windows because of console.log so that
+ * new lines are consistent.
+ * @param {string} s The input string.
+ */
+function normaliseWin(s) {
+  if (process.platform != 'win32') return s
+  return s.replace(/([^\r])\n/g, `$1${EOL}`)
 }
 
 export default run

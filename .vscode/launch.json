@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Zoroaster",
-      "program": "${workspaceFolder}/node_modules/.bin/zoroaster",
+      "program": "${workspaceFolder}/node_modules/zoroaster/depack/bin/zoroaster.js",
       "env": {
         "NODE_DEBUG": "@zoroaster/fork",
       },
@@ -23,7 +23,8 @@
       ],
       "skipFiles": [
         "<node_internals>/**/*.js"
-      ]
+      ],
+      "timeout": 20000,
     },
     {
       "type": "node",

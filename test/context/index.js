@@ -1,5 +1,6 @@
 import { resolve, join } from 'path'
 import { debuglog } from 'util'
+import { EOL } from 'os'
 
 const LOG = debuglog('@zoroaster/fork')
 
@@ -25,6 +26,10 @@ export default class Context {
    */
   get FIXTURE() {
     return resolve(FIXTURE, 'test.txt')
+  }
+  preprocess(s) {
+    if (process.platform != 'win32') return s
+    return s.replace(/([^\r])\n/g, `$1${EOL}`)
   }
   get SNAPSHOT_DIR() {
     return resolve(__dirname, '../snapshot')

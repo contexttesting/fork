@@ -66,6 +66,11 @@ _contextTesting.ForkConfig.prototype.includeAnswers
  */
 _contextTesting.ForkConfig.prototype.stripAnsi
 /**
+ * On Windows, updates all `\n` to `\r\n`, as `console.log` only prints `\n`. Default `false`.
+ * @type {boolean|undefined}
+ */
+_contextTesting.ForkConfig.prototype.normaliseOutputs
+/**
  * The function to run on `stdout` and `stderr` before comparing it to the output. Pass an object with `stdout` and `stderr` properties for individual pre-processors.
  * @type {((_contextTesting.Preprocessor|_contextTesting.ForkPreprocessor))|undefined}
  */
@@ -104,7 +109,7 @@ _contextTesting.ForkPreprocessor.prototype.stderr = function(stdout) {}
 /* typal types/api.xml */
 /**
  * This method will fork a process, and pass the inputs when `stdin` expects an input. Because `includeAnswers` is set to `true` by default, the answers will be included in the resulting `stdout` and `stderr` properties.
-Returns the result of the work, updated to contain answers in the interactive mode.
+    Returns the result of the work, updated to contain answers in the interactive mode.
  * @typedef {function(!_contextTesting.RunFork): !Promise<!_contextTesting.ForkResult>}
  */
 _contextTesting.fork
