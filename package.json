@@ -48,7 +48,7 @@
   },
   "homepage": "https://www.contexttesting.com",
   "devDependencies": {
-    "alamode": "^3.5.0",
+    "alamode": "^3.5.1",
     "depack": "^1.1.1",
     "documentary": "^1.37.0",
     "eslint-config-artdeco": "1.0.1",

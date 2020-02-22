@@ -6,6 +6,6 @@
 
 GNU Affero General Public License v3.0
 
-<ContextTestingFooter/>
+<context-testing-footer />
 
 %~ -1%
