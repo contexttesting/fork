@@ -1,3 +1,9 @@
+## 22 February 2020
+
+### [1.5.0](https://github.com/contexttesting/fork/compare/v1.4.0...v1.5.0)
+
+- [feature] Add an option to noramlise outputs.
+
 ## 30 January 2020
 
 ### [1.4.0](https://github.com/contexttesting/fork/compare/v1.3.3...v1.4.0)

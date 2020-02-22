@@ -57,6 +57,12 @@ const getForkArguments = async (forkConfig, args = [], contexts = [], props = {}
   }
 }
 
+/**
+ * Assert on the streamed fork output.
+ * @param {string} actual The actual output of the fork.
+ * @param {string|!Object} expected The expected value of a property.
+ * @param {string} prop The name of the property. 
+ */
 const assertForkOutput = (actual, expected, prop) => {
   try {
     if (typeof expected == 'string') {
