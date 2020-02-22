@@ -20,6 +20,23 @@ test-stdout
 test-stderr
 /**/
 
+## normalises outputs
+test/fixture/normalise
+
+/* normalise */
+true
+/**/
+
+/* stdout */
+test-stdout
+test-stdout
+/**/
+
+/* stderr */
+test-stderr
+test-stderr
+/**/
+
 ## is prevented from striping ANSI
 test/fixture/ansi
 

@@ -92,19 +92,19 @@ const assertFork = ({ code, stdout, stderr }, props, stripAnsi, preprocess, norm
   stderr = stderr.replace(/\r?\n$/, '')
   const o = stripAnsi ? stdout.replace(/\033\[.*?m/g, '') : stdout
   const e = stripAnsi ? stderr.replace(/\033\[.*?m/g, '') : stderr
-  const op = stdoutPre ? stdoutPre(o) : o
-  const ep = stderrPre ? stderrPre(e) : e
-  const nop = normaliseOutputs ? normaliseWin(op) : op
-  const nep = normaliseOutputs ? normaliseWin(ep) : ep
-  assertForkOutput(nop, props.stdout, 'stdout')
-  assertForkOutput(nep, props.stderr, 'stderr')
+  const no = normaliseOutputs ? normaliseWin(o) : o
+  const ne = normaliseOutputs ? normaliseWin(e) : e
+  const op = stdoutPre ? stdoutPre(no) : no
+  const ep = stderrPre ? stderrPre(ne) : ne
+  assertForkOutput(op, props.stdout, 'stdout')
+  assertForkOutput(ep, props.stderr, 'stderr')
   if (props.code && code != props.code) {
     const err =
       new Error(`Fork exited with code ${code} != ${props.code}`)
     err.property = 'code'
     throw err
   }
-  return { stdout: nop, stderr: nep }
+  return { stdout: op, stderr: ep }
 }
 
 /**
